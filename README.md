@@ -7,7 +7,7 @@ Brief description or introduction to your Flask project.
 
 - [Introduction](#introduction)
 - [Installation](#installation)
-- [ Table of Content ](#Table )
+- [ Table_of_Content ](#Table_of_Content )
 - [Usage](#usage)
 - [License](#license)
 
@@ -25,7 +25,7 @@ Provide instructions on how to install your project:
    - On Windows: `venv\Scripts\activate`
    - On macOS and Linux: `source venv/bin/activate`
 4. Install dependencies: `pip install -r requirements.txt`
-## Table of Content
+## Table_of_Content
 project
 1. app.py 
      ###  Main function for the app
