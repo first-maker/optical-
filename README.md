@@ -32,7 +32,7 @@ project
 3. license.txt
 4. pyfile
    * addre.py
-     Sub-heading this file heav four functian 
+     ### this file heav four functian 
      >get_ip  : to get loctian datiles>
      >get_location : handell   loctian datiles>
      >datpaseSelect : to sellect address datiles for user>
