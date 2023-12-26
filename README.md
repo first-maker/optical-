@@ -7,7 +7,7 @@ Brief description or introduction to your Flask project.
 
 - [Introduction](#introduction)
 - [Installation](#installation)
-- [ Table of Content ](#Table of Content )
+- [ Table of Content ](#Table )
 - [Usage](#usage)
 - [License](#license)
 
