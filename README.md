@@ -28,8 +28,8 @@ Brief description or introduction to your Flask project.
 
 - [Introduction](#introduction)
 - [Installation](#installation)
+- [ Table of Content ](#Table_of_Content )
 - [Usage](#usage)
-- [Contributing](#contributing)
 - [License](#license)
 
 ## Introduction
@@ -46,7 +46,77 @@ Provide instructions on how to install your project:
    - On Windows: `venv\Scripts\activate`
    - On macOS and Linux: `source venv/bin/activate`
 4. Install dependencies: `pip install -r requirements.txt`
+## Table of Content
+project
+1. app.py
+2. datbas
+3. license.txt
+4. pyfile
+   * addre.py
+   * branch.py
+   * brand.py
+   * cart.py
+   * copmany.py
+   * data.py
+   * dp.dp
+   * helpers.py
+   * model.py
+   * payment.py
+   * register.py
+   * resetPassword.py.
+   * sqlRequest.py
+   * updates.py
+   * user.py
+   * UserUpdate.py
+   * Viwer.py
 
+5. static
+    * imag
+    * payment
+    * uploads
+    * layout.j
+    * model.js
+    * script.js
+    * search.js
+    * style.css
+      
+7. templates
+   * add_company.html
+   * addJop.html
+   *addre.html
+   * admin.html
+   * branch.html
+   * brand.html
+   * cart.html
+   * email.html
+   * error.html
+   * help.html
+   * history.html
+   * index.html
+   * invoice.html
+   * layout.html
+   * learn.html
+   * login.html
+   * model.html
+   * netfectian.html
+   * newJop.html
+   * orderTrack.html
+   * ourBranch.html
+   * payhistory.html
+   * payment.html
+   * register.html
+   * reset.html
+   * search.html
+   * update.html
+   * updateBranch.html
+   * updateBrand.html
+   * updateCompany.html
+   * updateProduects.html
+   * updateTrack.html
+   * updatUser.html
+   * upload.html
+   * user.html
+   * viwer.html
 ## Usage
 
 Explain how to use/run your Flask project:
@@ -56,3 +126,5 @@ Explain how to use/run your Flask project:
    ```to work flask with depage 
    flask --app  app.py --debug run
 
+## License
+```license.text
