@@ -28,14 +28,17 @@ Provide instructions on how to install your project:
 ## Table of Content
 project
 1. app.py 
-     ###  Main Functian for the app
+     ###  Main function for the app
 
 2. datbas
 3. license.txt
-4. pyfile
-     ### All Python  file will py here
+4. requirements.txt :
+   >all pip will need it to start app uses
+   >
+6. pyfile
+     ###All Python file will be in this direction
    * addre.py
-     ### this file has one functian 
+     ### this file has one function 
      >get_ip  : to get loctian datiles
      >
      >get_location : Handle location details
@@ -70,57 +73,123 @@ project
      >to declare database
      >
    * helpers.py
-     ### this file has four  functian
+     ### this file has four  function
      >apology : To send erorr Message  
      >login_required : To confirm user Login  
      >password_confiarm :To confirm password requirement
      >messag :To send text Message 
 
    * model.py
-      ### this file has two  functian
+      ### this file has two  function
      > model: To add new  Model
-     >updateproduct :To add update   Model
-     
-
+     >updateproduct :To  update   Model
    * payment.py
-      ### this file has three  functian
-     >paypal_payment :
-     >capture_payment:
-     >paypal_capture_function
+      ### this file has four  function 
+     >paypal_payment :to get  payment  then return answer for
+     >
+     >capture_payment:To Handle payment request ,then will added order  details to orders table and invoices table
+     >
+     >paypal_capture_function :To get response details from paypal
+     >
+     >is_approved_payment:to confirm if payment request is approved or not
+     >
 
    * register.py
-           ### this file two  functian
+     ### this file has two  function
+     >registers : to register users
+     >
+     >logins : to confirm users login
+     >
 
-   * resetPassword.py.
-       ### this file two  functian
+   * resetPassword.py
+       ### this file has one  function
+     >resetPassword: to reset password
+     >
 
    * sqlRequest.py
-        ### this file two  functian
+        ### this file has many function to request data from database
+     >readBroudectList
+     >
+     >cotegryList
+     >
+     >cotegryList_collection
+     >
+     >iteam_view
+     >
+     >paymentview_user
+     >
+     >conifg_user
+     >
+     >invoiceDatiles
+     >
+     >orderTrack
+     >
+     >mainInvoiceList
+     >
+     >resetPassword
+     >
+     >sqliteHandel
 
    * updates.py
-           ### this file two  functian
+     ### this file has five  function
+     >updateCompany:To update company details
+     >
+     >updateBrand : To update Branch details
+     >
+     >updatTrack  : To update orders Track details
+     >updateBranch :To update Branch details
+     >
+     >deleteInvoice:To update Invoices details
+     >
 
    * user.py
-           ### this file two  functian
+     ### this file two  function
+     >admin :Page for admins data
+     >
+     >brofile : Page for users data
+     >
 
    * UserUpdate.py
-           ### this file two  functian
-
+     ### this file one  function
+     >userupdate : To update users details
+     >
    * Viwer.py
-   *       ### this file two  functian
+     ### this file one  function
+     >viwerData :to view all data for admins page
+     >
 
 
-5. static
-    * imag
+7. static
+    * imag:
+    > this folder for static media used in app design 
+         * sosial:
+            > this folder for static media used for sosiaal media icon
+      > 
+   
     * payment
-    * uploads
-    * layout.j
-    * model.js
-    * script.js
-    * search.js
-    * style.css
+          > this folder to save text file for all paymen transaction
+      >
       
-7. templates
+
+    * uploads
+      >this folder to save all files uploaded to app
+    * layout.js
+      > JS file used for layout template
+      > 
+    * model.js
+      >JS file used for model template
+      >
+    * script.js
+      >JS file used for all template
+      >
+    * search.js
+      >JS file used for search template
+      >
+    * style.css
+      >CSS file used for APP design
+      > 
+8. templates
+    ### this Folder has all html templates to will needed to view app
    * add_company.html
    * addJop.html
    *addre.html
@@ -169,21 +238,4 @@ Explain how to use/run your Flask project:
 ## License
 ```license.text
 
-
-├── src
-│   ├── controller
-│   │   ├── **/*.css
-│   ├── views
-│   ├── model
-│   ├── index.js
-├── public
-│   ├── css
-│   │   ├── **/*.css
-│   ├── images
-│   ├── js
-│   ├── index.html
-├── dist (or build
-├── node_modules
-├── package.json
-├── package-lock.json 
-└── .gitignore
+ 
