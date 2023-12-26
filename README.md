@@ -28,9 +28,12 @@ Provide instructions on how to install your project:
 ## Table of Content
 project
 1. app.py 
+     ###  Main Functian for the app
+
 2. datbas
 3. license.txt
 4. pyfile
+     ### All Python  file will py here
    * addre.py
      ### this file heav four functian 
      >get_ip  : to get loctian datiles
@@ -116,3 +119,22 @@ Explain how to use/run your Flask project:
 
 ## License
 ```license.text
+
+
+├── src
+│   ├── controller
+│   │   ├── **/*.css
+│   ├── views
+│   ├── model
+│   ├── index.js
+├── public
+│   ├── css
+│   │   ├── **/*.css
+│   ├── images
+│   ├── js
+│   ├── index.html
+├── dist (or build
+├── node_modules
+├── package.json
+├── package-lock.json 
+└── .gitignore
