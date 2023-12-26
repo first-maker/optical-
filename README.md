@@ -33,10 +33,14 @@ project
 4. pyfile
    * addre.py
      ### this file heav four functian 
-     >get_ip  : to get loctian datiles>
-     >get_location : handell   loctian datiles>
-     >datpaseSelect : to sellect address datiles for user>
-     >updat_address  : to add Our edit The addres>
+     >get_ip  : to get loctian datiles
+     >
+     >get_location : handell   loctian datile
+     >
+     >datpaseSelect : to sellect address datiles for user
+     >
+     >updat_address  : to add Our edit The addres
+     >
    * branch.py
    * brand.py
    * cart.py
