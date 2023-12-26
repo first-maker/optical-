@@ -35,31 +35,80 @@ project
 4. pyfile
      ### All Python  file will py here
    * addre.py
-     ### this file heav four functian 
+     ### this file has one functian 
      >get_ip  : to get loctian datiles
      >
-     >get_location : handell   loctian datile
+     >get_location : Handle location details
      >
-     >datpaseSelect : to sellect address datiles for user
+     >datpaseSelect : To select user address details 
      >
-     >updat_address  : to add Our edit The addres
+     >updat_address  : to add Or edit The address
      >
    * branch.py
+     ###  this file has one function
+     >addbranch : To add new company branch
+     >
    * brand.py
+       ###  this file has one function
+     >brandADD  :To add new  Brand
+     >
    * cart.py
+      ### this file has one function
+     >hndell_dat :Handle cart items
+     >
+     > cartView :To view items in cart
+     >
    * copmany.py
+     ###  this file has one function
+     >companys :To add new company 
+     >
+
    * data.py
+     > this file has  dictionaries for data static display
+     > 
    * dp.dp
+     >to declare database
+     >
    * helpers.py
+     ### this file has four  functian
+     >apology : To send erorr Message  
+     >login_required : To confirm user Login  
+     >password_confiarm :To confirm password requirement
+     >messag :To send text Message 
+
    * model.py
+      ### this file has two  functian
+     > model: To add new  Model
+     >updateproduct :To add update   Model
+     
+
    * payment.py
+      ### this file has three  functian
+     >paypal_payment :
+     >capture_payment:
+     >paypal_capture_function
+
    * register.py
+           ### this file two  functian
+
    * resetPassword.py.
+       ### this file two  functian
+
    * sqlRequest.py
+        ### this file two  functian
+
    * updates.py
+           ### this file two  functian
+
    * user.py
+           ### this file two  functian
+
    * UserUpdate.py
+           ### this file two  functian
+
    * Viwer.py
+   *       ### this file two  functian
+
 
 5. static
     * imag
