@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block title %}
+ Branch
+{% endblock %}
+
+
+
+
+{% block main %}
+<h1>Add Branch</h1>
+<hr class="hr_lineBLAK">
+{% with messages = get_flashed_messages() %}
+{% for message in messages %}
+<div class="alert alert-danger">
+    <strong>Error! <strong> {{message}}
+</div>
+
+{% endfor %}
+{% endwith %}
+
+{% if message %}
+<div class="alert alert-primary">
+  <strong>{{message}} </strong> 
+</div>
+{% endif %}
+
+<div class="company_div" >
+    <form action="/branch" method="post">
+          <div class="form-group">
+          <label for="Branchname">Branch Name</label>
+          <input type="text" class="form-control" name="branch_name" id="branch_name" placeholder="Branch Name">
+        </div>
+
+        <div class="form-group">
+            <label for="branch_type">Select Branch Type</label>
+            <select name="branch_type" id="branch_type" class="form-select" aria-label="Branch Type">
+              <option value='none'>Open this select menu</option>
+              <option value="Stor">Stor</option>
+              <option value="Online">Online</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="branch_stat">Select Branch Status</label>
+            <select name="branch_stat" id="branch_stat" class="form-select" aria-label="Branch status">
+              <option value='none'>Select Branch Status</option>
+              <option value="On">On</option>
+              <option value="Off">Off</option>
+            </select>
+          </div>  
+          <div class="form-group">
+            <label for="user_id">BRANCH Admin</label>
+            <select name="user_id" id="user_id" class="form-select" aria-label="Select Branch Admin ">
+              <option selected>Open this select menu</option>
+              {%  for i in broudect_list %}
+              <option value="{{i['user_id']}}">{{i['user_id']}}:{{ i['user_name']}}</option>
+              {% endfor %}
+    
+            </select>
+          </div>
+        <button type="submit" class="btn btn-primary">Add  Branch</button>
+      </form>
+{% endblock %}

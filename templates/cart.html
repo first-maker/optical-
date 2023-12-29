@@ -1,0 +1,125 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Cart
+{% endblock %}
+
+{% block search_resualt %}
+<div class="card-main " id="ul" style="display: none;" ></div>
+{% endblock %}
+
+
+{% block main %}
+<p id="resual"></p>
+<div>
+    <div id="cartpage"   nmouseout="navImagDisplayNone(this)">
+    <h1>Cart</h1>
+</div>
+
+    {% block cartpage %} {% endblock %}
+
+<div class="float-end w-25">
+    <div>
+        {% if response %}
+        {%if session["user_id"]%}
+        <a class="btn btn-outline-success " href="/addres">Check Out</a>
+        {% else %}
+        <a class="btn btn-outline-warning" href="/login">Log in To Check Out</a>
+        {% endif %}
+
+        {% endif %}
+    </div>
+</div>
+<div class="clearBoth"></div>
+<hr class="hr_line ">
+<div class="cariteamview">
+    {% if response %}
+    {% for item in response %}
+    <div class="cariteamview_imag ">
+        <div>
+            <img id="{{item['media_id']}}" src="static/uploads/{{item["imagelink"]}}" alt="{{item['imagelink']}} ">
+        </div>
+        <div style="margin-top:20px">
+            <form action="/item" method="POST">
+                <input type="text" name="item_id" value="{{item['product_id']}}" hidden>
+                <button class="btn btn-info btn-sm" type="submit">view</button>
+                <a class="btn btn-primary btn-sm" href="/">Stor</a>
+                <button class="btn btn-danger btn-sm" id="{{item['product_id']}}"
+                    onclick="removeiteam(this)">remove</button>
+            </form>
+            <p style="margin-top:30px">{{item['framCotegery']}} For {{item['Collection_name']}}</p>
+        </div>
+    </div>
+    <div class="cariteamview_body text_left">
+        <div>
+            <h3>Details</h3>
+        </div>
+        <hr class="hr_lineBLAK ">
+        <p>
+            {{item['brand_name']|upper}}
+            <span>
+                :
+                {{item['Model_no']}},{{item['color']}},{{item['lens_size']}},{{item['bridge_size']}}
+                {{item['temple_length']}}
+                <span>
+        </p>
+        <div class="cart_part">
+            <p>Price :</p>
+            <p>Discount :</p>
+            <p>AFTER DISC :</p>
+            <p>Quant</p>
+        </div>
+        <div class="cart_part">
+            <p>
+                <span class="color_red">{{item['retialPrice']|int}} SR</span>
+            </p>
+            <p class="color_red"> {{item['discount']}} %</p>
+            <p class="color_red">
+                {{item['after_discount']}}SR
+            </p>
+            <input type="number" id="{{item['product_id']}}" onblur="get_dat(this)" style="float:left"
+                class=" form-control w-50 " min="1" name="count" value="{{item['count']}}">
+            <button class="btn btn-info " style="float:left;" type="submit">+</button>
+        </div>
+    </div>
+    <div class="cariteamview_body2  text_left ">
+        <div class="">
+            <h3>Price</h3>
+            <hr class="hr_lineBLAK">
+            <p class="color_red">
+                {{item['totlaiteam']}} SR
+            </p>
+        </div>
+    </div>
+    <div class="clearBoth"></div>
+    <hr class="hr_line">
+    {% endfor %}
+
+    {% if total%}
+    <div class="total text_left">
+        <div style>
+            <h4> Quant :</h4>
+            <h4> Total Amount :</h4>
+        </div>
+        <div>
+            <h4 class="color_red">{{total['quant'] }}</h4>
+            <h4 class="color_red">{{total['total'] }} SR</h4>
+        </div>
+        <div>
+            {% endif %}
+
+            {% else %}
+            <div>
+                <p>Your Cart Is Free Start Now</p>
+                <a class="btn btn-primary" href="/">start</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+</div>
+<div class="clearBoth"> </div>
+
+<script src="/static/search.js"></script>
+
+{% endblock %}

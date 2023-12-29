@@ -1,0 +1,143 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Payment 
+{% endblock %}
+
+
+
+
+{% block main %}
+<h1>Payment </h1>
+<hr class="hr_lineBLAK">
+<div class="w-75 m-auto" > 
+    <div class="alert-success" id="alert"></div>    
+
+
+<div>
+    <div id="payment"> 
+        <div class="OrderDatiles_card float-start">
+            <div id="paypal-button-container"></div>    
+        </div>
+</div>
+
+
+
+
+<div class="datiles">
+<div class="OrderDatiles_card float-end" >
+    <h5> You will  have to pay <span class="color_red"> {{total['total']}} </span> SAR for items <span class="color_red ">  {{total['quant']}} </span> </h5>
+    <hr class="hr_lineBLAK"> 
+    <h3>  items details </h3>
+    <hr class="hr_lineBLAK"> 
+    {% for i in data_view %}
+    <p class="w-75 float-start">{{i['brand_name']}},  {{i['Model_no']}} , {{i['color']}}   <img style="width:55px" src="static/uploads/{{i["imagelink"]}}" alt="{{i['imagelink']}} ">
+        <form action="/item" method="POST">
+            <input type="text" name="item_id" value="{{i['product_id']}}" hidden>
+            <button class="link link-info float-end" type="submit">view</button>
+    
+        </form>
+    </p>
+    {%endfor%}
+    <div>
+
+<hr class="hr_lineBLAK clearBoth"> 
+
+<H5>   User Dailes</H5>
+<hr class="hr_lineBLAK"> 
+
+<div class="float-start  text-start ">
+
+  <p>User Name: <span>{{response[0]['user_name']|capitalize }} </span></p>
+  <p>Name: <span>{{response[0]['first_name']|capitalize }} {{response[0]['last_name']|capitalize }} </span></p>
+  <p>Email: <span>{{response[0]['email']}} </span></p>
+  <p>TEll: <span>{{response[0]['phone']}} </span></p>
+  <p>Wallet Remaining :  <span class="color_red">{{response[0]['wallet']}} SR</span></p>
+  <form action="/update"  method="post"> 
+      <input type="text" name="userIdUpdat" value="{{response[0]['user_id']}}" hidden >
+      <button class="btn btn-outline-warning m-2 "   type="submit">Update Datiles</button>
+    </form>
+</div>
+
+    </div>
+</div>
+</div>
+<div class="clearBoth"> </div>
+
+<div>
+<!-- Replace "test" with your own sandbox Business account app client ID -->
+<script src="https://www.paypal.com/sdk/js?client-id={{paypal_business_client_id}}&currency=USD"></script>
+<!-- Set up a container element for the button -->
+<script>
+    paypal.Buttons({
+        // Sets up the transaction when a payment button is clicked
+        createOrder: (data, actions) => {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: {{price}} // Can also reference a variable or function
+                    }
+                }]
+            });
+        },
+        // Finalize the transaction after payer approval
+        onApprove: (data, actions) => {
+            return fetch(`/payments/${data.orderID}/capture`, {
+                method: "post",
+            })
+                .then((response) => response.json())
+                .then((orderData) => {
+                    console.log(orderData)
+                    console.log(data)
+                  /*  return actions.order.capture().then(function (orderData) {
+                        // Successful capture! For dev/demo purposes:
+                        console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                        const transaction = orderData.purchase_units[0].payments.captures[0];
+                        element2=`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`;
+                        // When ready to go live, remove the alert and show a success message within this page. For example:
+                         element = document.getElementById('paypal-button-container');
+                         element.innerHTML = `<h3>Thank you for your payment!</h3>`+element2;
+                        })*//
+                        
+                        // Or go to another URL:  actions.redirect('thank_you.html');
+                    // Successful capture! For dev/demo purposes:
+                     console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                    const transaction = orderData.purchase_units[0].payments.captures[0];
+                    // alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
+                    // When ready to go live, remove the alert and show a success message within this page. For example:
+                    const element = document.getElementById('alert');
+                    element.innerHTML = '<p><h3><strong class="green_text"> Thank you for your payment!</strong></h3></p><p>Check your <a href="/brofile">User profile </a> for confirmation.</p>';
+
+                    document.getElementById('payment').style.display='none'
+                    document.getElementById('datiles').style.display='none'
+                  //  element.innerHTML = '<h3>Thank you for your payment! <button class="btn btn-danger " onclick="redirect()">Tracking order</button></h3> ';
+                    // Or go to another URL:  actions.redirect('thank_you.html');
+             
+                });
+        }
+    }).render('#paypal-button-container');
+    function redirect(){
+        url='http://127.0.0.1:5000/user'
+        window.setTimeout(function(){
+            window.location.href = url;
+        }, 300);
+      }
+
+
+/*        var count = 7; // The delay in seconds before redirecting.
+        var redirect = "https://www.jotform.com"; // The redirection's landing page.
+        function countDown() {
+        if(count >= 0){
+        document.getElementById("timer").innerHTML = count--;
+        setTimeout("countDown()", 1000);
+        }else{
+        window.location.href = redirect;
+        }
+        }
+        countDown();
+   */
+</script>
+
+
+{% endblock %}
+

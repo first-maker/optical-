@@ -1,0 +1,213 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    user
+{% endblock %}
+
+{% block main %}
+
+<div class="container">
+
+  {% with messages = get_flashed_messages() %}
+  {% for message in messages %}
+  <div class="alert alert-danger">
+      <strong>Error! <strong> {{message}}
+  </div>
+
+  {% endfor %}
+  {% endwith %}
+
+  {% if message %}
+  <div class="alert alert-primary">
+    <strong>{{message}} </strong> 
+</div>
+{% endif %}
+
+
+<div>
+  <p class="alert alert-light">
+    You are Welcome Mr/Mrs :
+    {{response[0]['first_name']|capitalize }}
+    {{response[0]['last_name']|capitalize}}
+
+  </p>
+</div>
+
+<hr class="hr_lineBLAK"> 
+
+
+  {#<a  type="button" class="btn btn-outline-danger" href="/reset"> Reset Password </a>#}
+
+
+  <div class="float-start w-50 text-start ">
+    <p>User Id: <span>{{response[0]['user_id']}} </span></p>
+    <p>User Name: <span>{{response[0]['user_name']|capitalize }} </span></p>
+    <p>Name: <span>{{response[0]['first_name']|capitalize }} {{response[0]['last_name']|capitalize }} </span></p>
+  <form action="/update"  method="post"> 
+    <input type="text" name="userIdUpdat" value="{{response[0]['user_id']}}" hidden >
+    <button class="btn btn-outline-warning m-2"   type="submit">Update</button>
+  </form>
+</div>
+
+<div class="float-start w-50 text-start">
+  <p>Email: <span>{{response[0]['email']}} </span></p>
+  <p>TEll: <span>{{response[0]['phone']}} </span></p>
+  <p>Wallet Remaining :  <span class="color_red">{{response[0]['wallet']}} SR</span></p>
+  <form action="/reset"  method="post"> 
+
+    <input type="text" name="useridReset" value="{{response[0]['user_id']}}" hidden >
+    <button class="btn btn-outline-danger m-2 "   type="submit">Reset Password </button>
+  </form>
+</div>
+
+<hr class="hr_lineBLAK m-2">
+
+
+<div class="OrderDatiles_card clearBoth  " >
+
+  <h1 class="hr_line bg-body-secondary m-2" id="OrderDatileshead">Invoice Details</h1>
+  <hr class="hr_lineBLAK">
+  <div id="OrderDatilesbody" class="m-1" style="display:none;" >
+      <!-- TODO: Loop through the database entries to display them in this table -->
+      <div class="table-responsive">
+    <table class="table table-striped mw-100">
+      <thead class="thead-dark">
+          <tr>
+            <td> #</td>
+              <th  scope="col">Seriel</th> 
+              <th  scope="col">Shop</th>
+              <th  scope="col">Quantity</th>
+              <th  scope="col">Net Amount</th>
+              <th  scope="col">Tax</th>
+              <th  scope="col">Tax Amount</th>
+              <th  scope="col">Total</th>
+              <th  scope="col">Status</th>
+              <th  scope="col">View</th>           
+          </tr>
+      </thead>
+      <tbody>
+      <!-- TODO: Loop through the database entries to display them in this table -->
+
+      {% if invoice %}
+      {% set ns = namespace(c = 0) %}
+      {% for i in invoice %}
+              <tr>
+                <td scope="row">{% set ns.c = ns.c + 1 %} {{ ns.c }} </td>
+               <td> {{i['invoice_id']}}</td>
+
+               <td>{{i['branch_name']}}</td>
+               <td>{{i['totalQuanet']}}</td>
+               <td>{{i['totalAmount']|float-i['taxAmount']|float}}</td>
+               <td>{{i['taxValue']}}%</td>
+               <td>{{i['taxAmount']}}</td>
+              <td>{{i['totalAmount']}}</td>
+              {%if i['status'] =='2' %}
+              <td><p  class="btn btn-danger w-100" >Cancel </p> </td>
+              {%elif i['status'] =='1' %}
+              <td><p  class="btn btn-warning w-100" >Pending </p> </td>
+              {%elif i['status'] =='0' %}
+              <td><p  class="btn btn-info w-100" >Active </p> </td>
+              {%endif%}
+              
+              <td>
+                <form action="/invoice"  method="post"> 
+                  <input type="text" name="invoice_id" value="{{i['invoice_id']}}" hidden >
+                  <button class="btn btn-info class_float"   type="submit">Invoice</button>
+                </form>
+              </td>
+              </tr>
+          {% endfor %}
+          {% else%}
+          <tr>
+            <td colspan="2"></td>
+          <td colspan="5"><a  type="button" class="btn btn-outline-primary" href="/">Start your shopping now</a> </td>
+          <td colspan="2"></td>
+          </tr>
+          {%endif%}
+      </tbody>
+  </table>
+</div>
+</div>
+</div>
+
+
+<div class=" OrderDatiles_card" >
+<h1 class="hr_line bg-body-secondary m-2"  id="OrderTrackhead"> Order Track </h1>
+<hr class="hr_lineBLAK">
+
+<div id="OrderTrackbody" style="display:none;" >
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+          <td> #</td>
+            <th  scope="col">Order No </th> 
+            <th  scope="col">Date-Time </th>
+            <th  scope="col">Status</th>
+            <th  scope="col">Payment </th>
+            <th  scope="col">View</th>    
+        </tr>
+    </thead>
+    <tbody>
+    <!-- TODO: Loop through the database entries to display them in this table -->
+
+    {% if orderTrack%}
+    {% set ns = namespace(c = 0) %}
+    {% for i in orderTrack %}
+            <tr>
+             <td scope="row">{% set ns.c = ns.c + 1 %} {{ ns.c }} </td>
+             <td> {{i['order_id']}}</td>
+
+             <td>{{i['date_time']}}</td>
+
+
+             {%if i['stat']=='0'%}
+             <td > <p class="btn btn-danger w-100"> Preparing <p/></td>
+             {%elif i['stat']=='1'%}
+             <td > <p class="btn btn-warning w-100">shipped <p/>  </td>
+             {%elif i['stat']=='2'%}
+             <td> <p class="btn btn-info w-100"> With Driver <p/> </td>
+             {%elif i['stat']=='3'%}
+             <td > <p class="btn btn-success w-100"> Complete<p/> </td>           
+              {%endif%}
+             {%if  i['payment_id'] %}
+             <td><p class="btn btn-success "> Done </p></td>
+             {%endif%}
+
+            <td>
+              <form action="/invoice"  method="post"> 
+                <input type="text" name="payment_id" value="{{i['payment_id']}}" hidden >
+                <button class="btn btn-outline-info"    type="submit">Invoice</button>
+              </form>
+            </td>
+            </tr>
+        {% endfor %}
+        {% else%}
+        <tr>
+          <td colspan="2"></td>
+        <td colspan="5"><a  type="button" class="btn btn-outline-primary" href="/">Start your shopping now</a> </td>
+        <td colspan="2"></td>
+        </tr>
+        {%endif%}
+    </tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+
+
+<div class="text-center clearBoth"></div>
+<div>
+  <h1 class="hr_line bg-body-secondary"  id="eyeTest"> Eye Test </h1>
+  <hr class="hr_lineBLAK">
+  <div id="eyeTestbody" class="bg-light" style="display:none">
+   <h5> Your Test history will be here </h5>
+  </div>
+</div>
+
+<a  type="button" class="btn btn-outline-primary" href="/admin"> Start your shopping </a>
+
+{% endblock %}

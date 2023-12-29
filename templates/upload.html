@@ -1,0 +1,114 @@
+
+
+
+{% extends "layout.html" %}
+
+{% block title %}
+upload images
+{% endblock %}
+
+{% block main %}
+
+<div class="container">
+
+  <center><h1>Add Broduct To Stor</h1></center>
+  {% with messages = get_flashed_messages() %}
+  {% for message in messages %}
+  <div class="alert alert-danger">
+      {{message}}
+  </div>
+  {% endfor %}
+  {% endwith %}
+ {%if response %}
+ <div class="alert alert-info">
+  <strong>{{response}}</strong>
+</div>
+{%endif%}
+
+
+
+<div class="container container_model" >
+  <div class="row align-items-start">
+    <div class="col">
+      {# One of three columns#}
+      
+    {#</div>
+    <div class="col">#}
+
+
+
+<form enctype="multipart/form-data" method="post" action="/upload" >
+
+  <div class="mb-3">
+  
+    <select value='null' name="product_type" id="product_type" class="form-select form-control mx-auto  w-50"  aria-label="Select Brand Type" >
+      <option selected value="null"> Select Broduct Type  </option>
+  
+      {% if brand_list %}
+      {% for i in  brand_list %}
+      <option value="{{i}}">  {{i}} </option>
+      {% endfor %} {% endif %}
+    </select>
+  </div>
+
+  <div class="mb-3">
+  
+    <select value='null' name="product_id" id="product_id" class="form-select form-control mx-auto w-50"  aria-label="Select Brand Type" >
+      <option selected value="null"> Select The Broduct  </option>
+
+    </select>
+  </div>
+
+
+  <div class="mb-3">
+    <input   class="form-control mx-auto w-50" id="description" name="description" placeholder="description" type="text">
+</div>
+
+
+        <div class="mb-3">
+          <input  class="form-control mx-auto w-50" id="file" name="multiple_files[]"  type="file" multiple>
+        </div>
+
+
+        {#<div class="row" style="width:50%; float:left;" >#}
+          <div class="mb-3">
+              <input class="form-check-input " type="checkbox"     id="Show_on" name="Show_on" value="show" />
+              <label class="form-check-label" for="Show_on">Show On Stor  </label>
+        </div>
+        <div class="clearBoth"></div>
+        <button class="btn btn-primary" type="submit">Add To Stor</button>
+    </form>
+
+
+    <form>
+      <div class="col" style="max-width:70%">
+
+      </div>
+
+</div>
+      
+
+
+<script>
+  var brand_type=document.getElementById('product_type')
+  product_type.addEventListener('blur', async function() {
+   let response = await fetch('/upload?product_type=' + product_type.value);
+   let broudect_list = await response.json();
+   console.log(broudect_list)
+   let broudct_optian = '<option selected>Open this select menu</option>';
+   for (let i in broudect_list){
+     
+     console.log(i)
+     broudct_optian+=`
+     
+     <option value="`+ broudect_list[i].product_id + `">`+  broudect_list[i].framCotegery +` : `+ broudect_list[i].brand_name + ` : ` +broudect_list[i].serieal +`
+     </option>
+    `
+    console.log( broudect_list[i].product_id)
+   }
+  document.querySelector('#product_id').innerHTML = broudct_optian;
+   
+ })
+ 
+</script>
+{% endblock %}

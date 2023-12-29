@@ -1,0 +1,143 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Invoice
+{% endblock %}
+
+{% block main %}
+
+<div class="container">
+  <span><h1>Invoice details <span class="text-center text-info"> Invoice No : {{invoice[0]['invoice_id']}}</span></span>  </h1>
+  {% with messages = get_flashed_messages() %}
+  {% for message in messages %}
+  <div class="alert alert-danger">
+      <strong>! <strong> {{message}}
+  </div>
+
+  {% endfor %}
+  {% endwith %}
+  {% if message %}
+  <div class="alert alert-primary">
+
+    <strong>{{message}} </strong> 
+</div>
+{%endif%}
+
+    <div class="table-responsive-sm  ">
+        <table class="table   text-start">
+          <thead>
+              <tr>
+              <th class="table   text-center" colspan="5"   scope="col">Tax Invoice</th>
+              {%if invoice[0]['status'] =='2' %}
+              <th class="table   text-center bg-danger" colspan="2"   scope="col">Invoice Already Cancel</th>
+              {%elif invoice[0]['status'] =='1' %}
+              <th class="table   text-center bg-warning" colspan="2"   scope="col">Invoice Pending To Cancel</th>
+              {%elif invoice[0]['status'] =='0' %}
+              <th class="table   text-center bg-info" colspan="2"   scope="col">Invoice Active</th>
+            {%endif%}
+            </tr>
+
+          </thead>
+          <tbody>
+          <!-- TODO: Loop through the database entries to display them in this table -->
+
+
+          {%if invoice %}
+          <tr>
+            <th   scope="col" >Seriel: </th> 
+            <td > {{invoice[0]['invoice_id']}}</td>
+            <th>Type:  </th> 
+            <td> {{invoice[0]['invoiceType']}}</td> 
+            <th>Payment:  </th> 
+            <td> {{invoice[0]['payment_status']}}</td>
+            <td>{{invoice[0]['date_time']}} </td> 
+         </tr>
+          <tr>
+            <th   scope="col">Company: </th>
+            <td> {{invoice[0]['companyNamy']}}</td>
+            <th  scope="col">Branch: </th>
+            <td> {{invoice[0]['branch_name']}}</td> 
+            <th  scope="col">Commercial No:  </th>
+            <td> {{invoice[0]['commercial_no ']}}</td> 
+            <td> </td> 
+           </tr>
+
+           <tr>
+            <th  scope="col"> Name </th>
+            <td> {{invoice[0]['userName']}}</td> 
+            <th  scope="col">Tell</th>
+            <td> {{invoice[0]['userTell']}}</td> 
+            <th  scope="col">Emeil</th>
+            <td> {{invoice[0]['userIdNo']}}</td>
+            <td> </td>  
+           </tr>
+           <tr>
+            <th colspan="7" class="table   text-center"   scope="col">Iteams</th>
+           </tr> 
+           <tr>
+            <th  scope="col">Seriel No</th>
+            <th  scope="col">Description</th>
+            <th  scope="col">Price</th>
+            <th  scope="col">Qentety</th>
+            <th  scope="col">Dis %</th>
+            <th  scope="col">Net Price</th>
+            <th  scope="col">Total</th>
+
+            <tr>
+           {% for i in invoice %}
+            <tr class="table-info">
+            <td > {{i['product_id']}}</td>
+            <td>{{i['productDescrptian']}} </td>
+            <td >{{i['Price']}}</td>
+            <td > {{i['iteamquent']}}</td>
+            <td > {{i['discout']}}</td>
+            <td>{{i['netPrice']}} </td>
+            <td > {{i['iteamAmount']}}</td>
+             </tr>
+                  {% endfor %}
+      
+
+                  <tr>
+                    <td colspan="2" rowspan="2" class="text-center"><img src="{{ qrcode("http://127.0.0.1:5000", box_size=4, border=0, error_correction='H',icon_img='logo.jpg') }}"> </td>
+                    
+
+                    <th class="text-end"   scope="col">Total Qentety :</th>
+                    <td> {{invoice[0]['totalQuanet']}}</td> 
+                   
+                        <th colspan="2" class="text-end"   scope="col">Total : </th>
+                        <td  > {{invoice[0]['totalAmount']}}</td> 
+                   </tr> 
+        <tr>
+
+         <th  colspan="1" class="text-end"    scope="col">Tax % :</th>
+         <td> {{invoice[0]['taxValue']}}</td> 
+     
+            <td class="text-center">
+                <form action="/deleteInvoice" method="post">
+                    <input type="text" name="invoice_id" value="{{invoice[0]['invoice_id']}}" hidden>
+                    {%if invoice[0]['status'] =='1' %}
+                    <button class="btn btn-outline-warning " type="submit"> Send Cancel</button>
+                    {%elif invoice[0]['status'] =='0' %}
+                    <button class="btn btn-outline-danger " type="submit">Cancel</button>
+                    {%elif invoice[0]['status'] =='2' %}
+                    {%endif%}             
+                   </form>
+
+                   <form action="/print" method="post">
+                    <input type="text" name="PrintId" value="{{invoice[0]['invoice_id']}}" hidden>    
+                    <button class="btn btn-outline-danger " type="submit">Print</button>
+        
+                   </form>
+            </td>
+
+         <th  colspan="" class="text-end"   scope="col">Tax Amount: </th>
+         <td> {{invoice[0]['taxAmount']}}</td> 
+        </tr>
+              {%endif%}
+          </tbody>
+      </table>
+    </div>
+    <div>
+
+
+{% endblock %}

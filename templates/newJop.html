@@ -1,0 +1,78 @@
+        
+        {% extends "layout.html" %}
+
+        {% block title %}
+        Jops
+        {% endblock %}
+        
+  
+        
+        
+        
+        {% block main %}
+        <div class="w-75 m-auto">
+       
+            <h1 class=" text-center">View Jpos </h1>
+            <hr class="hr_lineBLAK">
+            <div class="table-responsive  ">
+                <table class="table  ">
+                        <tr class="table-dark">
+                    <tbody>
+                        {% if NewJops %}
+                        {% for i in NewJops %}
+                        <tr class="table-info">
+                            
+                            <th scope="col">Job ID</th>
+                            <td> {{i['jops_is']}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Title </th>
+                            <td> {{i['Title']}}</td>
+                        </tr>
+                        <tr>   
+                            <th scope="col">Start In</th>
+                            <td> {{i['startIn']}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">End In</th>
+                            <td> {{i['EndIn']}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col"> Location</th>
+                            <td> {{i['loctian']}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Sallery</th>
+                            <td> {{i['sallery']}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Requirement</th>
+                            <td> {{i['requermeant']}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Datiles</th>
+                            <td> {{i['datiles']}}</td>
+                        </tr>
+
+                        {% endfor %}
+                        <tr>
+                            <th scope="col">Notes</th>
+                            <td> 
+                                To apply for  job, please send your CV and Certificates to our <a class="" href="mailto:`hasin3112@gmail.com`">email</a>, and include the job Id in the Email title
+                            </td>
+                        </tr>
+                        {% else%}
+                        <tr>
+                            <th scope="col">Notes</th>
+                            <td> 
+                                To apply for  job, please send your CV and Certificates to our  and include the job Id in the Email title
+                                We are pleased with your interest in joining our talented crew, but there are no jobs currently available, but you can still send your CV <a class="" href="mailto:`hasin3112@gmail.com`">here</a>, to join as soon as possible.
+                            </td>
+                        </tr>
+
+                        {% endif%}
+
+                    </tbody>
+                </table>
+            </div>
+{%endblock%}

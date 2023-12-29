@@ -1,0 +1,138 @@
+
+{% extends "layout.html" %}
+
+{% block title %}
+{{title|capitalize}}
+
+{% endblock %}
+
+ {# Add search button in index bage  #}
+
+
+
+
+{% block main%}
+{% with messages = get_flashed_messages() %}
+{% for message in messages %}
+<div class="alert alert-danger">
+    <strong>Error! <strong> {{message}}
+</div>
+
+{% endfor %}
+{% endwith %}
+  
+</div>
+<div class="card-main " id="card_main">
+ {% if response %}
+  {% for item in response %}
+  <div class="card card-view" >
+    <img class="card-img-top img_view" id="{{item['media_id']}}" src="static/uploads/{{item["imagelink"]}}" alt="{{item['imagelink']}} " >
+    <div class="top-left p-2 bg-danger text-bg-dark"> {{item['discount']|int}}%</div>
+
+    <div class="card-body bg-light">
+      <h5 class="card-title class_float" >{{item['brand_name']|capitalize}} {{item['Model_no']}} {{item['framCotegery']|capitalize}}  for {{item['Collection_name']|capitalize}}</h5>
+      <div  class="clearBoth"></div>
+      <div>
+      <p class="card-text w-50 float-start"  >Before <s class="color_red" >{{item['retialPrice']|int}}</s> SR  </p> 
+      <p class="card-text w-50 float-end text-end"  >Now <span class="color_red"> {{item['retialPrice']|int-((item['retialPrice']|int*item['discount']|int)/100)}} SR  </span> </p> 
+
+    </div>
+      
+      
+      <div class="clearBoth" ></div>
+      <form action="/item"  method="POst"> 
+        <input type="text" name="item_id" value="{{item['product_id']}}" hidden >
+        <div class="middle"> <div class="text">
+        <button class="btn"   type="submit">View</button>
+        </div></div>
+      </form>
+      
+      <form action="/cart"  method="post"> 
+        <input type="text" name="card_id" value="{{item['product_id']}}" hidden >
+        <button class="btn  btn-outline-info class_float"    type="submit">Add to Cart</button>
+      </form>
+      <p class="card-text float-end bg-info p-2  rounded-circle"  > {{item['framCotegeryHistory'] }} </p>
+
+    </div>
+  </div>
+
+  {% endfor %}
+  {% endif %}
+
+</div>
+
+
+<div  class="clearBoth" ></div>
+
+
+  {% if response_card  %}
+  <div id="crad_iteam" class="text-center"  onmouseout="navImagDisplayNone(this)">
+  <h1  class="m-m-auto">Iteam Details  </h1> 
+
+ <hr class="hr_line ">
+  {% for item in response_card %}
+  <div class="crad_iteam text_left" >
+    
+   <div class="crad_iteam_imag" > 
+    <img src='static/uploads/{{item["imagelink"]}}' alt="{{item['caption']}} " >
+   </div>
+
+   <div class="crad_iteam_body">
+      <div class="cart_part" >
+        <p>Product Type :</p>
+        <p>Brand :</p>
+        <p>Model No :</p>
+        <p>lens_size :</p>
+        
+        <p>Color :</p>
+        <p>Arm :</p>
+        <p>Price :</p>
+        <p>Discount :</p>
+        <p>AFTER DISC :</p>
+        <p>Collection type :</p>
+        <p>
+        <form action="/cart"  method="post"> 
+          <input type="text" name="card_id" value="{{item['product_id']}}" hidden >
+          <button class="btn btn-info"   type="submit">Add to Cart</button>
+        </form>
+        <p>
+        
+      </div>
+      <div class="cart_part" >
+        <p> {{item['brand_type'] }} </p> 
+        <p> {{item['brand_name']|upper}}  </p> 
+        <p> {{item['Model_no']}}  </p> 
+        <p>{{item['color']}} </p> 
+        <p>{{item['lens_size']}}  </p> 
+        <p> {{item['temple_length']}}  </p> 
+        
+        <p ><h5> <s class="color_red" >{{item['retialPrice']|int}}</s> SR  </h5></p>
+        <p>{{item['discount']}} %</p>
+        <p> {{item['retialPrice']|int-((item['retialPrice']|int*item['discount']|int)/100)}} SR </p>
+        <p>  {{item['framCotegeryHistory']|capitalize }}<p>
+
+        <p><a class="btn btn-info" href="/">Visit Stor</a> </p>
+
+      </div>
+      </div>
+
+  </div>
+  {% endfor %}
+</div>
+  {% endif %}
+
+
+
+<h5 id="contentToUpdate"> </h5>
+
+
+<script>
+
+
+       
+  
+</script>
+
+{% endblock %}
+
+

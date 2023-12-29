@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+
+{% block title %}
+     Add Company
+{% endblock %}
+
+{% block  close %}
+<input class="btn btn-close btn-danger " style="float:right;" type="button" onClick="self.close();" >
+
+{% endblock %}
+
+
+
+
+{% block main %}
+
+<div class="container">
+ <h1>Add Company</h1>
+  {% with messages = get_flashed_messages() %}
+  {% for message in messages %}
+  <div class="alert alert-danger">
+      <strong>Error! <strong> {{message}}
+  </div>
+
+  {% endfor %}
+  {% endwith %}
+
+  {% if message %}
+  <div class="alert alert-primary">
+    <strong>{{message}} </strong> Added successfully
+</div>
+{% endif %}
+
+
+<div class="company_div" >
+<form action="/company" method="post">
+      <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" name="name" id="name" placeholder="Name">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1"> Email </label>
+      <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+    </div>
+
+    <div class="form-group">
+        <label for="tell">Tell </label>
+
+        <input type="text" class="form-control" name="tell" id="tell" placeholder="tell">
+      </div>
+      <div class="form-group">
+        <label for="commercialNo">Commercial No</label>
+        <input type="text" class="form-control" name="commercialNo" id="commercialNo" placeholder="Commercial No">
+      </div>
+      <div class="form-group">
+        <label for="vat">Vat Number </label>
+        <input type="text" class="form-control" name="vat" id="vat" placeholder="Vat Number ">
+      </div>
+      <div class="form-group">
+        <label for="company_address">Company Address </label>
+        <input type="text" class="form-control" name="company_address" id="company_address" placeholder="Company Address">
+      </div>
+      <div class="form-group">
+        <label for="Companytype">Select Company Type</label>
+        <select name="company_type" id="company_type" class="form-select" aria-label="Select Company Type">
+          <option selected>Open this select menu</option>
+          {%  for i in names %}
+          <option value="{{i}}">{{i}}</option>
+          {% endfor %}
+
+        </select>
+      </div>
+    <button type="submit" class="btn btn-primary">Add  Company</button>
+  </form>
+{% endblock %}
+
+

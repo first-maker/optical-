@@ -1,0 +1,305 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Add model
+{% endblock %}
+
+
+{% block main %}
+
+<div class="container w-75">
+    <h1>Add New Model</h1>
+
+    {% with messages = get_flashed_messages() %}
+    {% for message in messages %}
+
+    <div class="alert alert-danger">
+        <strong>Error!<strong>{{message}}
+    </div>
+
+    {% endfor %}
+    {% endwith %}
+
+    {% if model_messag %}
+
+    <div class="alert alert-primary">
+        <strong>{{model_messag}} </strong>
+    </div>
+
+    {% endif %}
+
+
+    <div class="w-75 float-start" >
+        {#Form to add proudeact #}
+        <form action="/model" method="post">
+            {# Select company #}
+            <div class="form-group">
+                <label for="companyname">Supplier Name </label>
+                <select name="companyname" id="companyname" class="form-select" aria-label="Select Supplier Name">
+                    <option selected value='null'> Select Supplier</option>
+                    {% if compny_name%}
+                    {% for iteam in compny_name %}
+                    <option value="{{iteam['company_id']}}">{{iteam['company_name']}}</option>
+
+                    {% endfor %} {% endif %}
+                </select>
+            </div>
+
+            {#>Brand Type#}
+            <div class="form-group">
+                <label for="brandType">Brand Type</label>
+                <select value='null' name="brand_type" id="brand_type" class="form-select"
+                    aria-label="Select Brand Type">
+                    <option selected value='null'>Open this select menu</option>
+                </select>
+            </div>
+            {#Brand Name#}
+            <div class="form-group">
+                <label for="brand_name">Brand Name</label>
+                <select value='null' name="brand_name" id="brand_name" class="form-select" aria-label="Select Brand ">
+                    <option selected value='null'>Open this select menu</option>
+                </select>
+            </div>
+
+            {#ModelName#}
+            <div class="form-group">
+                <label for="ModelName "> Name </label>
+                <input type="text" class="form-control" name="ModelName" id="ModelName" placeholder="Model Name">
+            </div>
+            {#Model no#}
+            <div class="form-group">
+                <label for="Model_no">Model No </label>
+                <input type="text" class="form-control" name="Model_no" id="Model_no" placeholder="Model No ">
+            </div>
+            {#Cotegery#}
+            <div class="form-group">
+                <label for="cotegery">Cotegery</label>
+                <select value='null' name="cotegery" id="cotegery" class="form-select" aria-label="Select Cotegery ">
+                    <option value='null'> Select Fram Cotegery</option>
+                    <option value='sun'> Sun Glasses</option>
+                    <option value='glasses'>Eye Glasses</option>
+                    <option value='Lens'> Lens</option>
+                    <option value='ContactLens'>Contact Lens</option>
+                    <option value='Accessories'>Accessories</option>
+                </select>
+            </div>
+
+
+            {#CotegeryHistory#}
+            <div class="form-group">
+                <label for="CotegeryHistory">Cotegery History</label>
+                <select value='null' name="CotegeryHistory" id="CotegeryHistory" class="form-select"
+                    aria-label="Select History ">
+                    <option value='null'> Select Fram History</option>
+                    <option value='new'>New </option>
+                    <option value='offers'>Offers</option>
+                    <option value='topSeller'>Top Seller</option>
+                </select>
+            </div>
+
+            {#fram Collection#}
+            <div class="form-group">
+                <label for="Collection "> Collection </label>
+                <select value='null' name="collection" id="collection" class="form-select" aria-label="Collection">
+                    <option selected value='null'>Open this select menu</option>
+                    {% if cotgery %} {% for i in cotgery %}
+                    <option value="{{i}}"> {{i}} </option>
+                    {% endfor %} {% endif %}
+                </select>
+            </div>
+            {#Color#}
+            <div class="form-group">
+                <label for="color">Color</label>
+                <input type="text" class="form-control" name="color" id="color" placeholder="color ">
+            </div>
+            {#Lens Size#}
+            <div class="form-group">
+                <label for="Size">Lens Size </label>
+                <input type="text" class="form-control" name="size" id="size" placeholder="Size">
+            </div>
+            {# fram box arya#}
+            <div id="fram_box">
+                {#Bridge Size#}
+                <div class="form-group">
+                    <label for="Bridge">Bridge Size</label>
+                    <input type="text" class="form-control" name="bridge" id="bridge" placeholder="Bridge Size">
+                </div>
+                {#temple length#}
+                <div class="form-group">
+                    <label for="temple"> temple length </label>
+                    <input type="text" class="form-control" name="temple" id="temple" placeholder="Temple">
+                </div>
+            </div>
+            {# end for frame arya #}
+
+            {# mixed arya for lens and contact lens#}
+
+            <div id="maxIteam" style="display:none;">
+                {#Lens Material#}
+                <div class="form-group">
+                    <label for="Lensmaterial"> Lens Material</label>
+                    <select name="Lensmaterial" id="Lensmaterial" class="form-select" aria-label="Lens material">
+                        <option value="null" selected>Select Lens material </option>
+                        <option value="Soft"> Plastic </option>
+                        <option value="Hard"> Glasses </option>
+                        <option value="Soft"> Soft </option>
+                        <option value="Hard"> Hard </option>
+                    </select>
+                </div>
+                {#Lens Type#}
+                <div class="form-group">
+                    <label for="lens_type">Lens Type</label>
+                    <select name="lens_type" id="lens_type" class="form-select" aria-label="Select Lens Type">
+                        <option value="null" selected>Select Lens Type </option>
+                        <option value="Rx"> Rx </option>
+                        <option value="ready"> Ready </option>
+                    </select>
+                </div>
+                {# Lens Design #}
+                <div class="form-group">
+                    <label for="Lensdesign"> Lens Design</label>
+                    <select name="Lensdesign" id="Lensdesign" class="form-select" aria-label="Lens Design">
+                        <option value="null" selected>Select Lens Design</option>
+                        <option value="Single"> Single Vision </option>
+                        <option value="Toric"> Toric </option>
+                        <option value="Multifocal"> Multifocal </option>
+                        <option value="Bifoical"> Bifoical </option>
+                    </select>
+                </div>
+
+                {#lens_cute#}
+                <label for="lens_cute">Lens & contact Lens Cute </label>
+                <div class="container">
+                    {%if lens_cute %}
+                    {% for i in lens_cute %}
+                    <div class="row" style="width:50%; float:left;">
+                        <div class="col order-last">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="{{i}}" name="lens_cute"
+                                    value="{{i}}" />
+                                <label class="form-check-label" for="{{i}}">{{i}} </label>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor%} {%endif%}
+
+                </div>
+            </div>
+
+            {#lens box start #}
+            <div id="lens_box">
+                {#Lens Index#}
+                <div class="form-group">
+                    <label for="lens_index "> Lens Index </label>
+                    <select name="lens_index" id="lens_index" class="form-select" aria-label="Collection">
+                        <option value='null' selected> Select Index </option>
+                        {% if lens_index %} {% for x in lens_index %}
+                        <option value="{{ix}}"> {{x}} </option>
+                        {% endfor %} {% endif %}
+                    </select>
+                </div>
+
+            </div>
+            {#end Lens area #}
+
+            {# contact Lens Arya #}
+            <div id="contactLens" style="display:none;">
+                {#Lens Type#}
+                <div class="form-group">
+                    <label for="contactDuration">Lens Duration</label>
+                    <select name="contactDuration" id="contactDuration" class="form-select"
+                        aria-label="Select Contact Lens Duration">
+                        <option value="null" selected>Select Contact Lens Type </option>
+                        <option value="Permanent"> Permanent </option>
+                        <option value="year"> Year </option>
+                        <option value="month"> Month </option>
+                        <option value="week"> Week </option>
+                        <option value="day"> Day </option>
+                    </select>
+                </div>
+                {#Lens color#}
+            </div>
+            {# end contact Lens Arya#}
+            <div class="clearBoth"></div>
+            {##static box#}
+            {#Quantity#}
+            <div class="form-group">
+                <label for="quant "> Quantity </label>
+                <input type="Number" class="form-control" name="quant" id="quant" placeholder="0" value="0">
+            </div>
+            {#Whole Price#}
+            <div class="form-group">
+                <label for="WholePrice ">Whole Price </label>
+                <input type="Number" class="form-control" name="wholePrice" id="wholePrice" value="0">
+            </div>
+            {#Retial Price#}
+            <div class="form-group">
+                <label for="retialprice ">Retial Price </label>
+                <input type="Number" class="form-control" name="retialPrice" id="retialPrice" value="0">
+            </div>
+            {#Discount#}
+            <div class="form-group">
+                <label for="discount "> Discount </label>
+                <input type="Number" class="form-control" name="discount" id="discount" value="0">
+            </div>
+            {#TAX#}
+            <div class="form-group">
+                <label for="discount "> TAX </label>
+                <input type="text" class="form-control" name="tax" id="tax" value="0">
+            </div>
+
+            {#UPC code#}
+            <div class="form-group">
+                <label for="UPCcode"> UPC code </label>
+                <input type="text" class="form-control" name="UPCcode" id="UPCcode" placeholder="UPC code">
+            </div>
+            {#SKU Code#}
+            <div class="form-group">
+                <label for="SKUCode "> SKU Code </label>
+                <input type="text" class="form-control" name="SKUCode" id="SKUCode" placeholder="SKU Code ">
+            </div>
+            {#Description#}
+            <div class="form-group">
+                <label for="description "> Description </label>
+                <input type="text" class="form-control" name="description" id="description" placeholder="Description">
+            </div>
+
+            {#End static area#}
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Add New Iteam</button>
+            </div>
+
+        </form>
+    </div>
+    <!-- sectian to add -->
+    <div class="w-25 float-start ">
+        <!-- add company -->
+        <div class="form-group  ">
+            <label for="lens_type"></label>
+            <a class="btn btn-info form-control" href="javafscript:void(0);" NAME="Error Handling"
+                title="ZeroDivisionError handling"
+                onClick=window.open("company","Ratting","width=600,height=700,left=150,top=100,toolbar=0,status=0,");>Add
+                Company</a>
+        </div>
+        <!-- non value -->
+        <div class="form-group ">
+            <label for="lens_type"></label>
+            <input type="text" class="form-control" disabled>
+        </div>
+        <!-- add brand -->
+        <div class="form-group ">
+            <label for="lens_type"></label>
+            <label for="lens_type"></label>
+            <a class="btn btn-info form-control" href="javascript:void(0);" NAME="Error Handling"
+                title="ZeroDivisionError handling"
+                onClick=window.open("brand","Ratting","width=600,height=700,left=150,top=100,toolbar=0,status=0,");>Add
+                Brand</a>
+        </div>
+    </div>
+</div>
+
+<div class="clearBoth"> </div>
+
+<script src="/static/model.js"></script>
+{% endblock %}

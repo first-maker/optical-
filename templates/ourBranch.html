@@ -1,0 +1,88 @@
+        
+        {% extends "layout.html" %}
+
+        {% block title %}
+        Our Branches
+        {% endblock %}
+        
+        {% block  close %}
+        <input class="btn btn-close btn-danger " style="float:right;" type="button" onClick="self.close();" >
+        
+        {% endblock %}
+        
+        
+        
+        
+        {% block main %}
+        <div class="w-75 m-auto">
+       
+            <h1 class=" text-center">Our Branches </h1>
+            <hr class="hr_lineBLAK">
+            <div class="table-responsive  ">
+                <table class="table tab-content">
+                        <tr class="tabext-center le-dark">
+                    <tbody>
+                        {% if branchs %}
+                        {% for i in branchs %}
+                        <tr class="table-info">      
+                        <th scope="col" colspan="5" >{{i['branch_name']}}</th>
+                        </tr>
+                        <tr>      
+                            <th scope="col">Branch ID</th>
+                            <td> {{i['branch_id']}}</td>
+                            <th scope="col">Type</th>
+                            <td> {{i['branch_type']}}</td>
+                            <td>
+                                <a class="link link-primary" href="https://www.google.com/maps/{{i['Maps']}}">Maps</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="col" >Branch Name </th>
+                            <td colspan=""> {{i['branch_name']}}</td>
+                            <th scope="col" >Loctian</th>
+                            <td colspan=""> {{i['loctian']}}</td>
+                            
+                            <td colspan=""><a class="" href="tel:`{{i['brancTell']}}`">Tell:{{i['brancTell']}} </a></td>
+                        </tr>
+                        <tr>  
+                            <td>  </td>
+                            <th scope="col" class="table-warning" colspan="3"> Working hours </th>
+                            <td>  </td>
+                        </tr>
+
+                        <tr>  
+                            <th scope="col"> Morning Shift</th> 
+                            <td> Start Time: </td>
+                            <td> {{i['firstShiftOPen']}} AM</td>
+                            <td> End Time :  </td>
+
+                            <td> {{i['firstShiftClose']}} PM</td>
+                        </tr>
+     
+                        <tr>  
+                            <th scope="col">  Evening Shift</th> 
+                            <td> Start Time: </td>
+                            <td>  {{i['secandShiftOPen']}} AM</td>
+                            <td> End Time:</td>
+
+                            <td>{{i['secandfirstShiftClose']}} PM</td>
+                        </tr>
+
+                 
+   
+                        {% endfor %}
+                        <tr>
+                            <th scope="col">Notes</th>
+                            <td colspan="4"> 
+                                We are always happy to <a href="/help">  help </a>you in our branches and through our website. For further support, you can contact us through the <a class="" href="tel:`0540919725`">customer service number </a> or <a class="" href="mailto:`hasin3112@gmail.com`">email</a>.
+                                To apply for  job, please send your CV and Certificates to our , and include the job Id in the Email title
+                            </td>
+                        </tr>
+
+
+                        {% endif%}
+
+                    </tbody>
+                </table>
+            </div>
+{%endblock%}

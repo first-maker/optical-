@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Admin
+{% endblock %}
+
+
+
+{% block main %}
+{% if response  %}
+<h1>Welcome Mr : <span>{{response[0]['first_name'].upper()}} {{response[0]['last_name'].upper()}}</span>
+</h1>
+{% endif %}
+<form action="/reset"  method="post"> 
+
+  <input type="text" name="useridReset" value="{{session['user_id']}}" hidden >
+  <button class="btn btn-outline-danger m-2 float-end"   type="submit">Reset Password </button>
+</form>
+
+
+<hr class="hr_lineBLAK clearBoth" >
+
+
+  <div class="card-deck">
+    {% for item in admin_functian %}
+    <div class="card card-view">
+      <a href="{{item['url']}}" class=" nav-link">
+      <img src='/static/imag/{{item["icon"]}}' style="width: 150px; height:150px" class="card-img-top" alt='{{item["alt"]}}'>
+
+      <div class="card-body">
+        <h5 class="card-title">{{item["name"]}}</h5>
+        <p class="card-text">{{item["descrpe"]}}.</p>
+      </div>
+    </div>
+  </a>
+    {% endfor %}
+
+  </div>
+
+  <p></p>
+  <div class="clearBoth">
+  {% endblock %}

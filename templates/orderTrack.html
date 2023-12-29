@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Order Track
+{% endblock %}
+
+{% block main %}
+<h1>Order Track History</h1>
+<hr class="hr_lineBLAK"> 
+<div class="container">
+
+  {% with messages = get_flashed_messages() %}
+  {% for message in messages %}
+  <div class="alert alert-danger">
+      <strong>Error! <strong> {{message}}
+  </div>
+
+  {% endfor %}
+  {% endwith %}
+
+  {% if message %}
+  <div class="alert alert-primary">
+    <strong>{{message}} </strong> 
+</div>
+{% endif %}
+
+
+<div class="table-responsive">
+    <table class="table table-striped">
+      <thead class="thead-dark">
+          <tr>
+            <td> #</td>
+              <th  scope="col">Order No </th> 
+              <th  scope="col">Date-Time </th>
+              <th  scope="col">Status</th>
+              <th  scope="col">Payment </th>
+              <th  scope="col">View</th>    
+          </tr>
+      </thead>
+      <tbody>
+      <!-- TODO: Loop through the database entries to display them in this table -->
+
+      {% if orderTracks%}
+      {% set ns = namespace(c = 0) %}
+      {% for i in orderTracks %}
+              <tr>
+               <td scope="row">{% set ns.c = ns.c + 1 %} {{ ns.c }} </td>
+               <td> {{i['order_id']}}</td>
+
+               <td>{{i['date_time']}}</td>
+
+               {%if i['stat']=='0'%}
+                            <td > <p class="btn btn-danger w-100"> Preparing <p/></td>
+                            {%elif i['stat']=='1'%}
+                            <td > <p class="btn btn-warning w-100">shipped <p/>  </td>
+                            {%elif i['stat']=='2'%}
+                            <td> <p class="btn btn-info w-100"> With Driver <p/> </td>
+                            {%elif i['stat']=='3'%}
+                            <td > <p class="btn btn-success w-100"> Complete<p/> </td>           
+             
+               {%endif%}
+               {%if  i['payment_id'] %}
+               <td><p class="btn btn-success"> Done </p></td>
+               {%endif%}
+
+               <td  class="text-center">
+                <form action="/invoice"  method="post"> 
+                  <input type="text" name="invoice_id" value="{{i['payment_id']}}" hidden >
+                  <button class="btn btn-outline-info "    type="submit"> Invoice</button>
+                </form>
+              </td>
+              </tr>
+          {% endfor %}
+          {% else%}
+          <tr>     
+          
+            <td colspan="2"></td>
+          <td colspan="5" ><a  type="button" class="btn btn-outline-primary" href="/">Start your shopping now</a> </td>
+          <td colspan="2"></td>
+          </tr>
+          {%endif%}
+      </tbody>
+  </table>
+</div>
+
+
+
+    {%endblock%}

@@ -1,0 +1,116 @@
+{% extends "layout.html" %}
+{% block title %}
+Register
+{% endblock %}
+
+{% block main%}
+{{conifg_users}}
+<div class="container">
+  <h1>Register New User</h1>
+   {% with messages = get_flashed_messages() %}
+   {% for message in messages %}
+   <div class="alert alert-danger">
+       <strong>Error!<strong>{{message}}
+   </div>
+   {% endfor %}
+   {% endwith %}
+ 
+ {% if success %}
+   <div class="alert alert-primary">
+     <strong>{{success}} </strong> Added successfully
+ </div>
+ {% endif %}
+ 
+
+<div >
+  <div class="w-50 m-auto">
+<form action="/register" method="post">
+  <div class="mb-3 ">
+    <label for="FirstName" class="col-sm-2 col-form-label">First Name</label>
+    <input autocomplete="off" class="form-control " id="first_name" name="first_name"
+      placeholder="First Name" type="text" />
+  </div>
+  <div class="mb-3">
+    <label for="last_name" class="col-sm-2 col-form-label">Last Name</label>
+    <input autocomplete="off" class="form-control " id="last_name" name="last_name"
+      placeholder="Last Name" type="text" />
+  </div>
+  <div class="mb-3">
+    <label for="Email" class="col-sm-2 col-form-label">Email</label>
+    <input autocomplete="off" class="form-control " id="email" name="email" placeholder="Email"
+      type="email" required />
+  </div>
+  <div class="mb-3">
+    <label for="phone" class="col-sm-2 col-form-label">Tell Number</label>
+    <input autocomplete="off" class="form-control " id="phone" name="phone" placeholder="Tell Number"
+      type="tel" required />
+  </div>
+
+  <div class="mb-31">
+    <label for="Username" class="col-sm-2 col-form-label">Username</label>
+    <input autocomplete="off" class="form-control " id="username" name="username" placeholder="Username"
+      type="text" required />
+  </div>
+  {% if session["user_id"] %}
+  {% if session["type"] =='admin'%}
+  <div class="mb-3">
+    <label for="UserType" class="col-sm-2 col-form-label">User Type</label>
+    <select name="user_type" id="user_type" class="form-control  form-select" aria-label="Select User Type">
+      <option selected disab>Open this select menu</option>
+     
+      <option value="user">User</option>
+      <option value="admin">admin</option>
+      <option value="supadmin">Sup Admin</option>
+     
+    </select>
+  </div>
+  {% endif %}
+  {% endif %}
+  <div class="mb-3">
+    <label for="password" class="col-sm-2 col-form-label">password</label>
+    <input class="form-control " id="password" name="password" placeholder="Password" type="password"
+      pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+      title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters and special characters"
+      required />
+  </div>
+
+  <div class="mb-3">
+    <label for="confirmation" class="col-sm-2 col-form-label">Re Enter Password</label>
+    <input class="form-control " id="password_confirmation" name="confirmation"
+      placeholder="Re Enter Password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+      title="Must confiarm Password " required />
+    <input type="checkbox" onclick="show_password()" />Show Password
+  </div>
+
+  <div class="mb-3">
+    <button class="btn btn-primary w-50" type="submit">Sign Up</button>
+  </div>
+  <div class="mb-3">
+    <a class="btn btn-outline-primary" href="/login">Log In</a>
+    <a class="link link-info" href="/reset">Reset Password</a>
+
+  </div>
+
+</form>
+</div>
+</div>
+<div id="message" class="m-4 m-auto">
+  <h3>Password must contain the following:</h3>
+  <div class="w-50 float-start text-start">
+
+<p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+<p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+<p id="number" class="invalid">A <b>number</b></p>
+</div>
+<div class="w-50 float-start text-start">
+<p id="length" class="invalid">Minimum <b>8 characters</b></p>
+<p id="sampel" class="invalid"> 1<b> sympole of $, @, #, %, &, * </b></p>
+</div>
+</div>
+
+<div id="message2">
+<h3>Password must be Same :</h3>
+<p id="confiarm" class="invalid"><b> Password CONFIRAM</b></p>
+</div>
+
+{% endblock %}

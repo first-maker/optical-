@@ -1,0 +1,110 @@
+{% extends "layout.html" %}
+
+{% block title %}
+
+  Reset
+{% endblock %}
+
+{% block main %}
+
+<h1>Reset Password</h1>
+<hr class="hr_lineBLAK"> 
+{% with messages = get_flashed_messages() %}
+{% for message in messages %}
+<div class="alert alert-danger">
+    <strong>Error! <strong> {{message}}
+</div>
+
+{% endfor %}
+{% endwith %}
+
+
+{% if message %}
+<div class="alert alert-primary">
+  <strong>{{message}} </strong>
+  {% if session['user_id']%}
+  <a class="link link-primary" href="/brofile">Brofile</a>
+  {%else %}
+  <a class="link link-primary " href="/login">Log In</a>
+  {% endif %}
+{% endif %}
+</div>
+
+
+
+{% if datain%}
+<div class="w-50 m-auto">
+
+<form action="/reset" method="post">
+  <div class="mb-3">
+    <label for="password" class=" col-form-label">New Password</label>
+    <input class="form-control " id="password" name="password" autocomplete="off" placeholder="New Password" type="password" required />
+    <input class="form-control " id="userId" name="userId"  value="{{datain}}" hidden/>
+
+  </div>
+  
+  
+  <div class="mb-3">
+    <label for="confirmation" class=" col-form-label">Re Enter Password</label>
+    <input class="form-control " id="password_confirmation"  autocomplete="off" name="confirmation" placeholder="Re Enter Password" type="password" 
+      title="Must confiarm Password " required />
+    <input type="checkbox" onclick="show_password()" />Show Password
+  </div>
+
+  <div class="mb-3  w-50 m-auto">
+    <button class="btn btn-warning w-100 m-auto" type="submit">Reset Password</button>
+  </div>
+  
+
+</form>
+  <div class="clearBoth"></div>
+{% elif dataOut%}
+
+<div class="mb-3 m-auto  w-50">
+  <form action="/reset" method="post">
+  <label for="confiarmUser" class=" col-form-label">Enter Tell   </label>
+  <input autocomplete="off" class="form-control " id="confiarmUser" name="confiarmUser"
+    placeholder="User Tell" type="text"  required/> 
+  <label for="userName" class=" col-form-label">Enter User Name   </label>
+  <input autocomplete="off" class="form-control " id="userName" name="userName"
+    placeholder="User Name" type="text" required />
+    <div class="mb-3 clearBoth  m-auto  w-50 ">
+      <button class="btn btn-warning w-100 m-2" type="submit">confiarm</button>
+    </div>
+  </form>
+  <div class="mb-3 w-100 m-auto">
+    <a class="btn btn-outline-primary w-50   float-start " href="/login">Log In</a>
+    <a class="btn btn-outline-primary w-50  float-end" href="/register">Sign Up</a>
+  </div>
+</div>
+
+
+
+{%endif%}
+
+<div class="clearBoth"></div>
+<div id="message" class="m-4 m-auto ">
+   <h3>Password must contain the following:</h3>
+   <div class="w-50 float-start text-start">
+    <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+    <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+    <p id="number" class="invalid">A <b>number</b></p>
+   </div>
+
+   <div class="w-50 float-start text-start">
+    <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+    <p id="sampel" class="invalid"> 1<b> sympole of $, @, #, %, &, * </b></p>
+   </div>
+
+</div>
+
+<div id="message2">
+<h3>Password must be Same :</h3>
+<p id="confiarm" class="invalid"><b> Password CONFIRAM</b></p>
+</div>
+
+</div>
+
+{% endblock %}
+
+   

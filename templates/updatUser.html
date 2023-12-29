@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+{% block title %}
+Users Update
+{% endblock %}
+
+{% block main%}
+<h1>Update Users Datiles</h1>
+<hr class="hr_lineBLAK"> 
+{% with messages = get_flashed_messages() %}
+{% for message in messages %}
+<div class="alert alert-danger">
+    <strong>Error! <strong> {{message}}
+</div>
+
+{% endfor %}
+{% endwith %}
+
+{% if message %}
+<div class="alert alert-primary">
+  <strong>{{message}} </strong>
+  <a class="link link-primary" href="/viwer">viwer</a>
+{% endif %}
+</div>
+
+<div >
+  <div class="w-50 m-auto">
+    
+<form action="/update" method="post">
+    {%if userDatiles%}
+    {%for i in userDatiles%}
+    <div class="mb-3 ">
+      <p for="user_id" class="text-center text-bg-info">User Id No : {{i['user_id']}}</p>
+      <input autocomplete="off" class="form-control " value="{{i['user_id']}}" id="user_id" name="user_id"
+        hidden type="Number" />
+    </div>
+  <div class="mb-3 ">
+    <label for="FirstName" class="col-sm-2 col-form-label">First Name</label>
+    <input autocomplete="off" class="form-control " value="{{i['first_name']}}" id="first_name" name="first_name"
+      placeholder="First Name" type="text" />
+  </div>
+  <div class="mb-3">
+    <label for="last_name" class="col-sm-2 col-form-label">Last Name</label>
+    <input autocomplete="off" class="form-control " value="{{i['last_name']}}" id="last_name" name="last_name"
+      placeholder="Last Name" type="text" />
+  </div>
+  <div class="mb-3">
+    <label for="Email" class="col-sm-2 col-form-label">Email</label>
+    <input autocomplete="off" class="form-control " value="{{i['email']}}" id="email" name="email" placeholder="Email"
+      type="email" required />
+  </div>
+  <div class="mb-3">
+    <label for="phone" class="col-sm-2 col-form-label">Tell Number</label>
+    <input autocomplete="off" class="form-control " value="{{i['phone']}}" id="phone" name="phone" placeholder="Tell Number"
+      type="tel" required />
+  </div>
+
+  <div class="mb-31">
+    <label for="Username" class="col-sm-2 col-form-label">Username</label>
+    <input autocomplete="off" class="form-control " value="{{i['user_name']}}" id="username" name="username" placeholder="Username"
+      type="text" required />
+  </div>
+  <div class="mb-3">
+    <label for="UserType" class="col-sm-2 col-form-label">User Type</label>
+    <select name="user_type" id="user_type" class="form-control  form-select" aria-label="Select User Type">
+      <option selected >Open this select menu</option>
+      <option  value="{{i['U_type']}}" selected> {{i['U_type']|capitalize}}</option>
+      <option value="user" >User</option>
+      <option value="admin">Admin</option>
+      <option value="supadmin">Sup Admin</option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="UserType" class="col-sm-2 col-form-label text-center">User Status</label>
+    <select name="status" id="status" class="form-control  form-select" aria-label="Select User Type">
+      {% if i['status']=='0' %}
+      <option class="bg-success"  value="{{i['status']}}" selected> Active</option>
+      <option  class="bg-danger"  value="1" >Not Active</option>
+      {%elif i['status']=='1' %}
+      <option  class="bg-danger" value="{{i['status']}}" selected>Not Active</option>
+      <option class="bg-success" value="0" >Active</option>
+      {%else%}
+      <option class="bg-success" value="0" >Active</option>
+      <option  class="bg-danger"  value="1" >Not Active</option>
+      {%endif%}
+    </select>
+  </div>
+  <div class="mb-3">
+    <button class="btn btn-primary w-50" type="submit">Update</button>
+  </div>
+</form>
+{%endfor%}
+{%endif%}
+</div>
+</div>
+
+
+{% endblock %}

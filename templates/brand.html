@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+
+{% block title %}
+     Add Brand
+{% endblock %}
+
+
+
+{% block  close %}
+<input class="btn btn-close btn-danger " style="float:right;" type="button" onClick="self.close();" >
+
+{% endblock %}
+
+
+
+
+{% block main %}
+
+<div class="container">
+ <h1>Add Brand</h1>
+  {% with messages = get_flashed_messages() %}
+  {% for message in messages %}
+  <div class="alert alert-danger">
+      <strong>Error!<strong>{{message}}
+  </div>
+  {% endfor %}
+  {% endwith %}
+
+{% if brand_messag %}
+  <div class="alert alert-primary">
+    <strong>{{brand_messag}} </strong> Added successfully
+</div>
+{% endif %}
+
+
+
+<div class="company_div" >
+<form action="/brand" method="post">
+  <div class="form-group">
+    <label for="companyname">Supplier Name </label>
+
+    <select value='null' name="companyname" id="companyname" class="form-select" aria-label="Select Company Name"  >
+      <option selected>Open this select menu</option>
+      {% for iteam in response %} 
+      <option value="{{iteam['company_id']}}">{{iteam['company_name']}}</option>
+
+      {% endfor %}
+    </select>
+  </div>
+  
+    <div class="form-group">
+
+      <label for="brand_name">Brand Name</label>
+      <input type="text" class="form-control" name="brand_name" id="brand_name" placeholder="Brand Name">
+    </div>
+
+      <div class="form-group">
+        <label for="brandType">Brand Type</label>
+        <select value='null' name="brandType" id="brandType" class="form-select"  aria-label="Select Brand Type" >
+          <option selected>Open this select menu</option>
+          {% if brand_list %}
+          {% for i in brand_list %}
+          <option value="{{i}}"> {{i}} </option>
+          
+          {% endfor %}
+        {% endif %}
+        </select>
+
+              </div>
+      <div class="form-group">
+        <label for="Manufactory">Manufactory</label>
+        <input type="text" class="form-control" name="Manufactory" id="Manufactory" placeholder="Manufactory ">
+      </div>
+      <div class="form-group">
+        <label for="Description">Description</label>
+        <input type="text" class="form-control" name="Description" id="Description" placeholder="Description ">
+      </div>
+
+    <button type="submit" class="btn btn-primary">Add New</button>
+    
+  </form>
+  </div>
+
+{% endblock %}
+
+
+

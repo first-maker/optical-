@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block title %}
+
+  User Update
+{% endblock %}
+
+{% block main %}
+
+<h1>Update User Datiles</h1>
+<hr class="hr_lineBLAK"> 
+{% with messages = get_flashed_messages() %}
+{% for message in messages %}
+<div class="alert alert-danger">
+    <strong>Error! <strong> {{message}}
+</div>
+
+{% endfor %}
+{% endwith %}
+
+{% if message %}
+<div class="alert alert-primary">
+  <strong>{{message}} </strong>
+  <a class="link link-primary" href="/brofile">Brofile</a>
+{% endif %}
+</div>
+ 
+{%if userDatiles%}
+<div class="m-auto w-50">
+  <form action="/update" method="post">
+    {%for i in userDatiles %}
+    <div class="mb-3">
+
+      <Label class="col-form-label text-center" id="user_name" name="user_name"   >User Name : {{i['user_name']}} </label>
+      <input class="form-control " id="userId" name="userId"  value="{{i['user_id']}}" hidden/>
+   
+    </div>
+    <div class="mb-3">
+      <label for="first_name" class=" col-form-label">First Name</label>
+      <input class="form-control " id="first_name" name="first_name" value="{{i['first_name']}}" autocomplete="off" placeholder="First Name" type="text" required />
+  
+    </div>
+    <div class="mb-3">
+      <label for="last_name" class=" col-form-label">Last Name</label>
+      <input class="form-control " id="last_name" name="last_name" value="{{i['last_name']}}"  autocomplete="off" placeholder="Last Name" type="text" required />
+    </div>
+    <div class="mb-3">
+      <label for="email" class=" col-form-label">Email</label>
+      <input class="form-control " id="email" name="email" value="{{i['email']}}" autocomplete="off" placeholder="Email" type="email" required />
+    </div>
+    <div class="mb-3">
+      <label for="phone" class=" col-form-label">Tell </label>
+      <input class="form-control " id="phone" name="phone" value="{{i['phone']}}" autocomplete="off" placeholder="Tell" type="tell" required />
+    </div>
+
+    <div class="mb-3 clearBoth  m-auto  w-50 ">
+      <button class="btn btn-warning w-100 m-2" type="submit">Update</button>
+    </div>
+
+    {%endfor%}
+</form>
+</div>
+{%endif%}
+{% endblock %}
+
+   

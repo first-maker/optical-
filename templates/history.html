@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+
+{% block title %}
+
+  History
+{% endblock %}
+
+{% block main %}
+<h1>Invoice History</h1>
+<hr class="hr_lineBLAK">
+        <div class="table-responsive  ">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td> #</td>
+                      <th  scope="col">Seriel</th> 
+                      <th  scope="col">Shop</th>
+                      <th  scope="col">Quantity</th>
+                      <th  scope="col">Net Amount</th>
+                      <th  scope="col">Tax</th>
+                      <th  scope="col">Tax Amount</th>
+                      <th  scope="col">Total</th>
+                      <th  scope="col">Time</th>  
+                      <th scope="col">Status</th>
+                      <th  scope="col">View</th>           
+                  </tr>
+            </thead>
+            <tbody>
+            <!-- TODO: Loop through the database entries to display them in this table -->
+                {% if history %}
+                {% set ns = namespace(c = 0) %}
+                {% for i in history %}
+                        <tr>
+                          <td scope="row">{% set ns.c = ns.c + 1 %} {{ ns.c }} </td>
+                         <td> {{i['invoice_id']}}</td>
+          
+                         <td>{{i['branch_name']}}</td>
+                         <td>{{i['totalQuanet']}}</td>
+                         <td>{{i['totalAmount']|float-i['taxAmount']|float}}</td>
+                         <td>{{i['taxValue']}}%</td>
+                         <td>{{i['taxAmount']}}</td>
+                        <td>{{i['totalAmount']}}</td>
+                        <td >{{ i["date_time"]}}</td>
+                        {%if i['status'] =='2' %}
+                        <td><p  class="btn btn-danger w-100" >Cancel </p> </td>
+                        {%elif i['status'] =='1' %}
+                        <td><p  class="btn btn-warning w-100" >Pending </p> </td>
+                        {%elif i['status'] =='0' %}
+                        <td><p  class="btn btn-info w-100" >Active </p> </td>
+                        {%endif%}
+                        
+                        <td  class="text-center">
+                          <form action="/invoice"  method="post"> 
+                            <input type="text" name="invoice_id" value="{{i['invoice_id']}}" hidden >
+                            <button class="btn btn-info text-center "    type="submit">Invoice</button>
+                          </form>
+                        </td>
+                        </tr>
+                    {% endfor %}
+                    {% else%}
+                    {% endif%}
+
+            </tbody>
+        </table>
+    </div>
+   
+{% endblock %}
+
+

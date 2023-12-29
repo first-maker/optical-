@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Hussam {% block title %}{% endblock %}</title>
+    <link href="/static/styles.css" rel="stylesheet">
+    <meta name="description" content>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/static/imag/logo.jpg" rel="icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- start continear for all body  -->
+
+    <!-- headear aria  -->
+    <header>
+        <div id="header">
+            <nav class="bg-light border navbar navbar-expand-md navbar-light">
+                <!-- nav iteams   -->
+    
+           
+                <div class="container-fluid">
+                    <a class="nav-link m-2 " href="/cart">
+                        <button type="button" class="icon-button bg-body ">
+                            <span class="material-icons">
+                                <img style=" width:50px; border-radius:50%" src="/static/imag/logo.jpg" alt="logo">
+                            </span>
+        
+                        </button>
+                    </a>
+
+                    <a class="navbar-brand" href="/">
+                        <span class="blue"> H</span>
+                        <span class="red"> U</span>
+                        <span class="yellow">S</span>
+                        <span class="green">S</span>
+                        <span class="red">SAM</span>
+                    </a>
+
+                    <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"
+                        class="navbar-toggler" data-bs-target="#navbar" data-bs-toggle="collapse" type="button">
+                        <span class="navbar-toggler-icon"></span>
+
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbar">
+                        <!-- butoon in the center of nav-->
+                        <div class="nav-item " style="margin:auto">
+                            <!-- dark mode boutton 
+
+                            <input value="" class="btn btn-outline-dark" type="button" onclick="Dark_modefunc()"
+                                id="Dark_mode" name="body_night">
+                               -->
+                            <!-- Searsh boutton -->
+                            <a class="nav-item">
+                                <button class="btn btn-outline-info" id="search_btn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-search" viewBox="0 0 16 16">
+                                        <path
+                                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                    </svg>
+                                </button>
+                            </a>
+
+
+                        </div>
+                        <!--for log in nav show-->
+
+                        {% if session["user_id"] %}
+                        <ul class="navbar-nav me-auto mt-2">
+                            {% if session["type"] =='admin'%}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/admin">Board</a>
+                            </li>
+
+                            {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/brofile">Brofile</a>
+                            </li>
+                            {% endif %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/payhistory">Buy History</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/orderTrack">Order History</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/history">Invoice History</a>
+                            </li>
+                            <!-- small pag nav ize-->
+                            <li class="nav-item" id="nav_link_smll"></li>
+
+                        </ul>
+                        <!--  logout, langouag,and cart butoon -->
+                        <ul class="navbar-nav ms-auto mt-2">
+                            <li class="nav-item">
+                                <a class="nav-link " href="/">AR</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/cart">
+                                    <button type="button" class="icon-button bg-body">
+                                        <span class="material-icons">
+                                            <img style="width: 30px" src="/static/imag/1.PNG" alt="cart">
+                                        </span>
+                                        <span class="icon-button__badge">
+                                            {{session['iteams']|length}}
+                                        </span>
+                                    </button>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+
+                                <a class="nav-link" href="/netfectian">
+
+
+                                    <button type="button" class="icon-button bg-body">
+                                        <span class="material-icons">
+                                            <img style="width: 30px" src="/static/imag/notification.png" alt="cart">
+                                        </span>
+                                        <span class="icon-button__badge">
+                                            {{session["netfectians"]}}
+                                        </span>
+                                    </button>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-danger m-1" href="/logout">Log Out</a>
+                            </li>
+                            <!-- nav for asor iteams -->
+
+                        </ul>
+                        {% else %}
+                        <ul class="navbar-nav ms-auto mt-2">
+                            <!-- small pag nav ize-->
+                            <li class="nav-item" id="nav_link_smll"></li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/register">Register</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/login">Log In</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/">AR</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/cart">
+                                    <button type="button" class="icon-button bg-body">
+                                        <span class="material-icons">
+                                            <img style="width: 30px" src="/static/imag/1.PNG" alt="cart">
+                                        </span>
+                                        <span class="icon-button__badge">
+                                            {{session['iteams']|length}}
+                                        </span>
+                                    </button>
+                                </a>
+                            </li>
+
+                        </ul>
+                        {% endif %}
+                    </div>
+            </nav>
+
+            {# sectin for bar to vie iteam for wide screen #}
+            <nav class="nav nav-pills bg-body-secondary nav-justified" id="nav_link"></nav>
+            {# searh box area will show here in index bage #}
+            <nav class="navbar navbar-light bg-light justify-content-between" style="display: none" id="search_sectin">
+                <input autocomplete="off" placeholder="Search" id="search" type="text"
+                    onfocus="navImagDisplayNone(this)" class="form-control mr-sm-2  ">
+            </nav>
+            {# nav imag view#}
+            <sectin class="nav_sectin" id="navImagBar" style="display:none;"></sectin>
+
+    </header>
+
+    <!-- end of header  
+     <!  {# main area for show all iteam have three bloak main ,  searchresault , crad iteam#}-->
+
+
+    <div class="card-main " id="ul" style="display: none;">
+        {% block search_resualt %}
+        {% endblock %}
+    </div>
+
+
+    <main class="container-fluid py-5 text-center center clearBoth" onmouseout="navImagDisplayNone(this)">
+        {% block main %}
+
+        {% endblock %}
+
+
+    </main>
+    {# search resualt area for show find iteam #}
+    <!-- crad itam area -->
+
+    <!-- end of main  -->
+    <!-- Footer -->
+
+    <footer class="text-center text-lg-start bg-body-tertiary text-muted">
+        <!-- Section: Social media -->
+
+        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+   
+            <div class="m-auto" id="footeroiaclMedia">
+
+            </div>
+
+            <!-- Right -->
+        </section>
+        <!-- Section: Social media -->
+
+        <!-- Section: Links  -->
+        <section class="">
+            <div class="container text-center text-md-start mt-5">
+                <!-- Grid row -->
+                <div class="row mt-3">
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <!-- Content -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            <i class="fas fa-gem me-3"></i>Hussam Optics  
+                        </h6>
+                        <p>
+                            For more than forty years, our company has provided a unique experience for all wearers of medical glasses and sunglasses from the latest collections of all brands.
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Products
+                        </h6>
+                        <p>
+                            <a href="/sun" class="footerA">Sun Glasses</a>
+                        </p>
+                        <p>
+                            <a href="/glasses" class="footerA">Eye Glasses</a>
+                        </p>
+                        <p>
+                            <a href="/offers" class="footerA">Offers</a>
+                        </p>
+                        <p>
+                            <a href="ContactLens" class="footerA">Contact Lens</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Useful links
+                        </h6>
+                        <p>
+                            <a href="/learn" class="footerA">Learning</a>
+                        </p>
+                        <p>
+                            <a href="ourBranch" class="footerA">Our Branches</a>
+                        </p>
+                        <p>
+                            <a href="newJop" class="footerA">Jop</a>
+                        </p>
+                        <p>
+                            <a href="/help" class="footerA">Help</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+                        <div id="footerContact"> <div>
+                     
+                       </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+            </div>
+        </section>
+        <!-- Section: Links  -->
+
+        <!-- Copyright -->
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+            © 2024 Copyright:
+
+            <a class="text-reset fw-bold" href="https://github.com/first-maker">Hussain Codes</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="/static/script.js"></script>
+
+    <script src="/static/layout.js"></script>
+    <script src="/static/search.js"></script>
+</body>
+
+
+</html>
+
+

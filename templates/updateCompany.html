@@ -1,0 +1,89 @@
+{% extends "layout.html" %}
+
+{% block title %}
+     Update Companys
+{% endblock %}
+
+{% block  close %}
+<input class="btn btn-close btn-danger " style="float:right;" type="button" onClick="self.close();" >
+
+{% endblock %}
+
+
+
+
+{% block main %}
+
+<div class="container">
+  
+ <h1> Update Companys</h1>
+ <hr class="hr_lineBLAK">
+  {% with messages = get_flashed_messages() %}
+  {% for message in messages %}
+  <div class="alert alert-danger">
+      <strong>Error! <strong> {{message}}
+  </div>
+
+  {% endfor %}
+  {% endwith %}
+
+  {% if message %}
+  <div class="alert alert-primary">
+    <strong>{{message}} </strong> Update successfully
+    <a class="link link-primary" href="/viwer">viwer</a>
+
+</div>
+{% endif %}
+{%if company%}
+{%for i in company %}
+<div class="company_div" >
+<form action="/updateCompany" method="post">
+    <div class="form-group">
+        <p  class="text-center text-bg-info">Company  Id No : {{i['company_id']}}</p>
+        <input type="text" class="form-control" name="companyUpdate" id="companyUpdate" placeholder="Name" hidden value="{{i['company_id']}}">
+      </div>
+      <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" name="name" id="name" placeholder="Name" value="{{i['company_name']}}">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1"> Email </label>
+      <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Enter email" value="{{i['company_email']}}">
+    </div>
+
+    <div class="form-group">
+        <label for="tell">Tell </label>
+
+        <input type="text" class="form-control" name="tell" id="tell" placeholder="tell" value="{{i['company_tell']}}">
+      </div>
+      <div class="form-group">
+        <label for="commercialNo">Commercial No</label>
+        <input type="text" class="form-control" name="commercialNo" id="commercialNo" placeholder="Commercial No" value="{{i['commercialNo']}}">
+      </div>
+      <div class="form-group">
+        <label for="vat">Vat Number </label>
+        <input type="text" class="form-control" name="vat" id="vat" placeholder="Vat Number " value="{{i['vat_no']}}" >
+      </div>
+      <div class="form-group">
+        <label for="company_address">Company Address </label>
+        <input type="text" class="form-control" name="company_address" id="company_address" placeholder="Company Address" value="{{i['company_address']}}">
+      </div>
+      <div class="form-group">
+        <label for="Companytype">Select Company Type</label>
+        <select name="company_type" id="company_type" class="form-select" aria-label="Select Company Type" value="{{i['company_type']}}">
+          <option value="{{i['company_type']}}" selected>{{i['company_type']}}</option>
+          {%  for i in names %}
+          <option value="{{i}}">{{i}}</option>
+          {% endfor %}
+
+        </select>
+      </div>
+    <button type="submit" class="btn btn-primary"> Update  Company</button>
+  </form>
+  <div class="clearBoth"> </div>
+
+  {%endfor%}
+  {%endif%}
+{% endblock %}
+
+

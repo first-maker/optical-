@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Add Jop
+{% endblock %}
+
+
+
+
+{% block main %}
+<h1>Add Jop</h1>
+<hr class="hr_lineBLAK">
+{% with messages = get_flashed_messages() %}
+{% for message in messages %}
+<div class="alert alert-danger">
+    <strong>Error! <strong> {{message}}
+</div>
+
+{% endfor %}
+{% endwith %}
+
+{% if message %}
+<div class="alert alert-primary">
+  <strong>{{message}} </strong> 
+</div>
+{% endif %}
+
+<div class="w-50  m-auto">
+    <form action="/addJop" method="post">
+        
+        <div class="mb-3">
+            <label for="Title" class="col-sm-2 col-form-label">Title</label>
+            <input autocomplete="off" autofocus class="form-control " id="Title" name="Title"  type="text" required>
+        </div>
+        <div class="mb-3">
+            <label for="startIn" class="col-sm-2 col-form-label">Start In </label>
+            <input autocomplete="off" autofocus class="form-control " id="startIn" name="startIn"  type="date" required>
+        </div>
+        <div class="mb-3">
+            <label for="EndIn" class="col-sm-2 col-form-label">End  In </label>
+            <input autocomplete="off" autofocus class="form-control " id="EndIn" name="EndIn"  type="date" required>
+        </div>
+        <div class="mb-3">
+            <label for="location" class="col-sm-2 col-form-label">Location </label>
+            <input autocomplete="off" autofocus class="form-control " id="location" name="location"  type="text" required>
+        </div>
+        <div class="mb-3">
+            <label for="Sallery" class="col-sm-2 col-form-label">Sallery </label>
+            <input autocomplete="off" autofocus class="form-control " id="Sallery" name="Sallery"  type="text" required>
+        </div>
+        <div class="form-group">
+                <label for="requirement">Requirement</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="requirement" required></textarea>
+              </div>
+        
+        <div class="form-group">
+            <label for="Datiles">Datiles</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="datiles" required></textarea>
+          </div>
+        <div class="mb-3  m-auto">
+        <button class="btn btn-primary w-50 m-2" type="submit">Add</button>
+             </div>
+   
+    </form>
+</div>
+
+
+{% endblock %}
+

@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+
+{% block title %}
+ Update Branch
+{% endblock %}
+
+
+
+
+{% block main %}
+<h1>Update Branch</h1>
+<hr class="hr_lineBLAK">
+{% with messages = get_flashed_messages() %}
+{% for message in messages %}
+<div class="alert alert-danger">
+    <strong>Error! <strong> {{message}}
+</div>
+{% endfor %}
+{% endwith %}
+
+{% if message %}
+<div class="alert alert-primary">
+  <strong>{{message}} </strong> 
+</div>
+{% endif %}
+
+
+<div class="company_div" >
+
+{%if Branch%}
+
+{%for i in Branch%}
+<p  class="text-center text-bg-info">Branch  Id No : {{i['branch_id']}} Name :{{i['branch_name']}}  </p>
+
+    <form action="/updateBranch" method="post">
+          <div class="form-group">
+          <label for="Branchname">Branch Name</label>
+          <input type="text" class="form-control" value="{{i['branch_name']}}" name="branch_name" id="branch_name" placeholder="Branch Name">
+          <input type="Number" class="form-control" value="{{i['branch_id']}}" name="branchUpdate" id="branchUpdate" hidden >
+
+        </div>
+
+        <div class="form-group">
+            <label for="branch_type">Select Branch Type</label>
+            <select name="branch_type" id="branch_type" class="form-select" aria-label="Branch Type">
+              <option value="{{i['branch_type']}}">{{i['branch_type']}}</option>
+              <option value="Stor">Stor</option>
+              <option value="Online">Online</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="branch_stat">Select Branch Status</label>
+            <select name="branch_stat" id="branch_stat" class="form-select" aria-label="Branch status">
+              <option value="{{i['branch_stat']}}">{{i['branch_stat']}}</option>
+              <option value="On">On</option>
+              <option value="Off">Off</option>
+            </select>
+          </div>  
+          <div class="form-group">
+            <label for="user_id">BRANCH Admin</label>
+            <select name="user_id" id="user_id" class="form-select" aria-label="Select Branch Admin ">
+              {%  for x in broudect_list %}
+               {% if x['user_id'] == i['user_id'] %}
+               <option class="bg-info" selected value="{{i['user_id']}}">{{x['user_id']}}:{{ x['user_name']}}</option>
+               {%elif x['user_id'] != i['user_id']  %}
+              <option value="{{x['user_id']}}">{{x['user_id']}}:{{ x['user_name']}}</option>
+              {%endif%}
+              {% endfor %}
+    
+            </select>
+          </div>
+        <button type="submit" class="btn btn-primary">Update  Branch</button>
+      </form>
+      {%endfor%}
+      {%endif%}
+{% endblock %}

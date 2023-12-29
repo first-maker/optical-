@@ -1,0 +1,61 @@
+
+{% extends "layout.html" %}
+
+{% block title %}
+Help
+{% endblock %}
+
+
+
+
+{% block main %}
+<h1>Send Message</h1>
+<hr class="hr_lineBLAK">
+{% with messages = get_flashed_messages() %}
+{% for message in messages %}
+<div class="alert alert-danger">
+    <strong>Error! <strong> {{message}}
+</div>
+
+{% endfor %}
+{% endwith %}
+
+{% if message %}
+<div class="alert alert-primary">
+  <strong>{{message}} </strong> 
+</div>
+{% endif %}
+
+<div class="w-50  m-auto">
+    <form action="/help" method="post">
+        
+        <div class="mb-3">
+            <label for="username" class="col-sm-2 col-form-label">Tell</label>
+            <input autocomplete="off" autofocus class="form-control " id="TellNamber" name="TellNamber"  type="text" required>
+        </div>
+        <div class="mb-3">
+            <label for="username" class="col-sm-2 col-form-label">Email</label>
+            <input autocomplete="off" autofocus class="form-control " id="Email" name="Email"  type="email" required>
+        </div>
+        <div class="mb-3">
+            <label for="username" class="col-sm-2 col-form-label">Name</label>
+            <input autocomplete="off" autofocus class="form-control " id="Name" name="Name"  type="text" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="Message">Message</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="Message" required></textarea>
+          </div>
+        <div class="mb-3  m-auto">
+        <button class="btn btn-primary w-50 m-2" type="submit">Send</button>
+             </div>
+    <div class="mb-3 m-2">
+        <a class="btn btn-outline-primary" href="/login">login</a>
+        <a class="btn btn-outline-primary" href="/register">Register</a>
+        <a class="link link-info" href="/reset">Reset Password</a>
+    </div>
+    </form>
+</div>
+
+
+{% endblock %}

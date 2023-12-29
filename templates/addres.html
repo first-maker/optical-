@@ -1,0 +1,200 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Addres
+{% endblock %}
+
+
+
+
+{% block main %}
+
+<div class="container clearBoth">
+
+  {% with messages = get_flashed_messages() %}
+  {% for message in messages %}
+  <div class="alert alert-danger">
+      <strong>Error! <strong> {{message}}
+  </div>
+
+  {% endfor %}
+  {% endwith %}
+
+  {% if addresmessag %}
+  <div class="alert alert-primary">
+    <strong>{{addresmessag}} </strong> 
+</div>
+{% endif %}
+
+
+<div  >  <h1>Updat Your Datiles   </h1> 
+</div>
+<div class="form-group ">
+  <a type="text" href="/payment" class=" btn btn-outline-warning float-end p-2  rounded-circle" name="pay"  id="pay" placeholder="locitanHerf" target="_blank"  >Pay Now </a>
+</div>
+ <hr class="hr_line clearBoth">
+
+<div class="company_div" >
+
+    {% if addres_list %}
+     {%  for i in addres_list %}
+     <form action="/addres" method="post">
+      <div class="form-group">
+       <label for="countery_name">Select Countery Name</label>
+         <select name="countery_name" id="countery_name" class="form-select" aria-label="countery_name">
+         <option value="{{i['countery_name']}}" selected>{{i['countery_name']}}<option>
+         {%  for x in countries %}
+         <option value="{{x['name']}}">{{x['name']}}</option>
+          {% endfor %}
+          </select>
+      </div>
+
+     <div class="form-group">
+      <input type="text" class="form-control" name="userIP" id="userIP"  hidden value="{{data['ip']}}">
+      </div>
+
+      <div class="form-group">
+      <label for="Region"> Region Name</label>
+      <input type="text" class="form-control" name="Region" id="Region" placeholder="Region Name" value="{{i['Region']}}">
+      </div>
+
+      <div class="form-group">
+      <label for="city_name"> City  </label>
+      <input type="text" class="form-control" name="city_name" id="city_name"  placeholder="City " value="{{i['city_name']}}">
+      </div>
+
+      <div class="form-group">
+       <label for="district_name">District </label>
+        <input type="text" class="form-control" name="district_name" id="district_name" placeholder="District" value="{{i['district_name']}}">
+      </div>
+
+      <div class="form-group">
+        <label for="street">Street</label>
+        <input type="text" class="form-control" name="street" id="street" placeholder="Street" value="{{i['street']}}">
+      </div>
+
+      <div class="form-group">
+        <label for="buliding_number">Buliding Number </label>
+        <input type="text" class="form-control" name="buliding_number" id="buliding_number" placeholder="Buliding Number" value="{{i['buliding_number']}}">
+      </div>
+
+      <div class="form-group">
+        <label for="unit_number">Unit Number </label>
+        <input type="text" class="form-control" name="unit_number" id="unit_number" placeholder="Unit Number" value="{{i['unit_number']}}">
+      </div>
+
+      <div class="form-group">
+        <label for="zip_code"> Zip Code </label>
+        <input type="text" class="form-control" name="zip_code" id="zip_code" placeholder="Zip Code" value="{{i['zip_code']}}">
+      </div>
+
+      <div class="form-group">
+        <label for="extend_zip_code">Extend Zip Code </label>
+        <input type="text" class="form-control" name="extend_zip_code" id="extend_zip_code" placeholder="Extend Zip Code" value="{{i['extend_zip_code']}}">
+      </div>
+
+      <div class="form-group">
+        <label for="Location Description">Location Description </label>
+      </div>
+
+      <div class="input-group mb-3">
+        <input type="text" class="form-control m-1" name="location_description" id="location_description" placeholder="Location Description" value="{{i['location_description']}}">
+        <input type="text" class="form-control" name="location"  id="location" placeholder="location " hidden value="{{i['location_url']}}" >
+        <div class="input-group-append m-1">
+        <button type="button"  class="btn btn-outline-warning float-end input-group-text" onclick="getLocation()">Updat Location</button> 
+        </div>
+        <div class="input-group-append m-1">
+          <a type="text" href="{{i['location_url']}}" class="btn btn-outline-primary float-end input-group-text" name="locitanHerf"  id="locitanHerf" placeholder="locitanHerf" target="_blank"  >View in Map</a>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" name="UpdateAddras"  id="UpdateAddras" hidden value="{{i['address_id']}}" >
+      <button type="submit" class="btn btn-primary">updat Address </button>
+      </form>
+      </div>
+      {% endfor%}
+      {# if user not in data #}
+      {%else%}
+      <form action="/addres" method="post">
+      <div class="form-group">
+        <label for="countery_name">Select Countery Name</label>
+          <select name="countery_name" id="countery_name" class="form-select" aria-label="countery_name">
+          <option  selected >Select Countery<option>
+         {%  for x in countries %}
+          <option value="{{x['name']}}">{{x['name']}}</option>
+         {% endfor %}
+         </select>
+       </div>
+      <div class="form-group">
+     
+       <input type="text" class="form-control" name="userIP" id="userIP"  hidden >
+       </div>
+ 
+       <div class="form-group">
+       <label for="Region"> Region Name</label>
+       <input type="text" class="form-control" name="Region" id="Region" placeholder="Region Name" >
+       </div>
+ 
+       <div class="form-group">
+       <label for="city_name"> City  </label>
+       <input type="text" class="form-control" name="city_name" id="city_name"  placeholder="City ">
+       </div>
+ 
+       <div class="form-group">
+        <label for="district_name">District </label>
+         <input type="text" class="form-control" name="district_name" id="district_name" placeholder="District">
+       </div>
+ 
+       <div class="form-group">
+         <label for="street">Street</label>
+         <input type="text" class="form-control" name="street" id="street" placeholder="Street" >
+       </div>
+ 
+       <div class="form-group">
+         <label for="buliding_number">Buliding Number </label>
+         <input type="text" class="form-control" name="buliding_number" id="buliding_number" placeholder="Buliding Number" >
+       </div>
+ 
+       <div class="form-group">
+         <label for="unit_number">Unit Number </label>
+         <input type="text" class="form-control" name="unit_number" id="unit_number" placeholder="Unit Number" >
+       </div>
+ 
+       <div class="form-group">
+         <label for="zip_code"> Zip Code </label>
+         <input type="text" class="form-control" name="zip_code" id="zip_code" placeholder="Zip Code" >
+       </div>
+ 
+       <div class="form-group">
+         <label for="extend_zip_code">Extend Zip Code </label>
+         <input type="text" class="form-control" name="extend_zip_code" id="extend_zip_code" placeholder="Extend Zip Code" >
+       </div>
+ 
+       <div class="form-group">
+         <label for="Location Description">Location Description </label>
+       </div>
+ 
+       <div class="input-group mb-3">
+         <input type="text" class="form-control m-1" name="location_description" id="location_description" placeholder="Location Description" >
+         <input type="text" class="form-control" name="location"  id="demo" placeholder="location " hidden >
+         <div class="input-group-append m-1">
+         <button type="button"  class="btn btn-outline-warning float-end input-group-text" onclick="getLocation()">Allow Location</button> 
+         </div>
+         <div class="input-group-append m-1">
+           <a type="text" href="" class="btn btn-outline-primary float-end input-group-text" name="locitanHerf"  id="locitanHerf" placeholder="locitanHerf" target="_blank"  >View in Map</a>
+         </div>
+       </div>
+       <div class="form-group">
+        <input type="text" class="form-control" name="addAddreas"  id="addAddreas" hidden value="newAddreas" >
+       <button type="submit" class="btn btn-primary">Add  Address </button>
+       </div>
+      </form>
+      {% endif %}
+   
+
+</div>
+  <div class="form-group ">
+    <a type="text" href="/payment" class=" btn btn-outline-warning float-end p-2  rounded-circle" name="pay"  id="pay" placeholder="locitanHerf" target="_blank"  >Pay Now </a>
+  </div>
+{% endblock %}
+

@@ -1,0 +1,34 @@
+        
+        {% extends "layout.html" %}
+
+        {% block title %}
+Learning
+        {% endblock %}
+        
+        {% block main %}
+
+  
+        <h1> Continuing Learning Center .</h1>
+        <hr class="hr_lineBLAK">
+         {% with messages = get_flashed_messages() %}
+         {% for message in messages %}
+         <div class="alert alert-danger">
+             <strong>Error! <strong> {{message}}
+         </div>
+       
+         {% endfor %}
+         {% endwith %}
+       
+         {% if messag %}
+         <div class="alert alert-primary">
+           <strong>{{messag}} </strong> 
+       
+       </div>
+       {% endif %}
+        
+        
+        
+  
+
+
+{%endblock%}

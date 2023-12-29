@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Netfection{% endblock %}
+
+
+
+{% block  close %}
+<input class="btn btn-close btn-danger " style="float:right;" type="button" onClick="self.close();" >
+
+{% endblock %}
+
+{% block main %}
+
+<div class="container  text-center  m-auto ">
+
+ <h1>Netfection</h1>
+<hr class="hr_lineBLAK">
+
+{%if netfectiansInvoice %}
+{%for i in netfectiansInvoice %}
+
+
+{%if i['status']=='1'%}
+<p class="alert alert-warning w-75  m-auto" role="alert">
+  Invoice No :{{ i['invoice_id']}} Pending To Cancel
+</p>
+{%elif i['status']=='2'%}
+<p class="alert alert-success w-75 m-auto" role="alert">
+  Invoice No :{{ i['invoice_id']}}   Cancel  success 
+</p>
+{%endif%}
+<p class=" m-3"> </p>
+{%endfor%}
+{%endif%}
+
+  </div>
+
+
+
+
+
+{% endblock %}
